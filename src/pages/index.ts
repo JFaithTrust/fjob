@@ -1,0 +1,7 @@
+export { default as Contact } from './contact'
+export { default as Layout } from './layout/layout'
+export { default as Home } from './home'
+export { default as About } from './about'
+export { default as Jobs } from './jobs/jobs'
+export { default as Workers } from './workers/workers'
+export { default as JobDetail } from './jobs/job-detail'

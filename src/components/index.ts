@@ -1,0 +1,6 @@
+export { default as Hero } from './hero'
+export { default as Jobs } from './jobs'
+export { default as Workers } from './workers'
+export { default as Categories } from './categories'
+export { default as Feedbacks } from './feedbacks'
+export { default as Faq } from './faq'
