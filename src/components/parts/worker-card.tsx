@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getCategoryById } from "@/api/fetchCategory";
 import { getDistrictById } from "@/api/fetchDistrict";
 import { getRegionByDistrictId } from "@/api/fetchRegion";
+import { useNavigate } from "react-router-dom";
 
 interface Worker {
   worker: Workers;
@@ -15,6 +16,8 @@ const WorkerCard = ({ worker }: Worker) => {
   const [category, setCategory] = useState<Category>();
   const [district, setDistrict] = useState<District>();
   const [region, setRegion] = useState<Region>();
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getPartOfJobs = async () => {
@@ -56,7 +59,7 @@ const WorkerCard = ({ worker }: Worker) => {
             <Badge className="px-5">{worker.gender}</Badge>
             {category && <Badge className="px-5">{category.title}</Badge>}
           </div>
-          <Button className="px-4 py-1.5 rounded-xl text-sm font-semibold">
+          <Button className="px-4 py-1.5 rounded-xl text-sm font-semibold" onClick={() => navigate(`/worker-detail/${worker.id}`)}>
             Ko'rish
           </Button>
         </div>
