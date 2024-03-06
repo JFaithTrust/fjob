@@ -2,7 +2,7 @@ import { Jobs } from "@/types";
 import { JobCard } from "./parts";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
-import { getAllJobs } from "@/api/fetchJobs";
+import { getJobsByPagination } from "@/api/fetchJobs";
 import { useNavigate } from "react-router-dom";
 
 const Jobs = () => {
@@ -10,7 +10,7 @@ const Jobs = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAllJobs().then((data) => setJobs(data));
+    getJobsByPagination(1,4).then((data) => setJobs(data));
   }, []);
   return (
     <div className="bg-lightblue">
@@ -19,7 +19,7 @@ const Jobs = () => {
           <span className="text-darkblue">Top</span> Jobs
         </h1>
         <div className="grid grid-cols-4 gap-3">
-          {jobs.slice(0, 3).map((job) => (
+          {jobs.map((job) => (
             <JobCard job={job} key={job.id} />
           ))}
         </div>

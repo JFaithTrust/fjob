@@ -41,7 +41,7 @@ const JobCard = ({ job }: Job) => {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
-            <span className="text-2xl font-bold leading-none text-darkindigo">
+            <span className="text-xl font-bold leading-none text-darkindigo">
               {job.title}
             </span>
           </div>
@@ -65,8 +65,10 @@ const JobCard = ({ job }: Job) => {
             <Badge className="px-5">{job.gender}</Badge>
             {category && <Badge className="px-5">{category.title}</Badge>}
           </div>
-          <Button className="px-4 py-1.5 rounded-xl text-sm font-semibold"
-                  onClick={() => navigate(`/job-detail/${job.id}`)}>
+          <Button
+            className="px-4 py-1.5 rounded-xl text-sm font-semibold"
+            onClick={() => navigate(`/job-detail/${job.id}`)}
+          >
             Ko'rish
           </Button>
         </div>
