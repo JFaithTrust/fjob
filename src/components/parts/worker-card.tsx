@@ -7,6 +7,7 @@ import { getCategoryById } from "@/api/fetchCategory";
 import { getDistrictById } from "@/api/fetchDistrict";
 import { getRegionByDistrictId } from "@/api/fetchRegion";
 import { useNavigate } from "react-router-dom";
+import { IoLocationOutline } from "react-icons/io5";
 
 interface Worker {
   worker: Workers;
@@ -43,12 +44,17 @@ const WorkerCard = ({ worker }: Worker) => {
             <span className="text-2xl font-bold leading-none text-darkindigo">
               {worker.title}
             </span>
-            {district && region && (
+          </div>
+        </div>
+        <div>
+          {district && region && (
+            <div className={`flex`}>
+              <IoLocationOutline />
               <span className="text-base leading-none font-normal text-gray-600">
                 {district.name}, {region.name}
               </span>
-            )}
-          </div>
+            </div>
+          )}
         </div>
         <div className="flex items-center font-bold">
           <span className="text-darkindigo">{worker.salary} so'm</span>{" "}
@@ -59,7 +65,8 @@ const WorkerCard = ({ worker }: Worker) => {
             <Badge className="px-5">{worker.gender}</Badge>
             {category && <Badge className="px-5">{category.title}</Badge>}
           </div>
-          <Button className="px-4 py-1.5 rounded-xl text-sm font-semibold" onClick={() => navigate(`/worker-detail/${worker.id}`)}>
+          <Button className="px-4 py-1.5 rounded-xl text-sm font-semibold"
+                  onClick={() => navigate(`/worker-detail/${worker.id}`)}>
             Ko'rish
           </Button>
         </div>

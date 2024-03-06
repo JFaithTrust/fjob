@@ -7,6 +7,7 @@ import { getCategoryById } from "@/api/fetchCategory";
 import { getDistrictById } from "@/api/fetchDistrict";
 import { getRegionByDistrictId } from "@/api/fetchRegion";
 import { useNavigate } from "react-router-dom";
+import { IoLocationOutline } from "react-icons/io5";
 
 interface Job {
   job: Jobs;
@@ -43,16 +44,21 @@ const JobCard = ({ job }: Job) => {
             <span className="text-xl font-bold leading-none text-darkindigo">
               {job.title}
             </span>
-            {district && region && (
-              <span className="text-base leading-none font-normal text-gray-600">
-                {district.name}, {region.name}
-              </span>
-            )}
           </div>
         </div>
         <div className="flex items-center font-bold">
           <span className="text-darkindigo">{job.salary} so'm</span>{" "}
           <span className="text-orange-400">/Oy</span>
+        </div>
+        <div>
+          {district && region && (
+            <div className={`flex`}>
+              <IoLocationOutline />
+              <span className="text-base leading-none font-normal text-gray-600">
+                {district.name}, {region.name}
+              </span>
+            </div>
+          )}
         </div>
         <div className="flex flex-row justify-between items-center">
           <div className="flex gap-x-2">
