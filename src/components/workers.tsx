@@ -2,13 +2,13 @@ import { Workers } from "@/types";
 import { WorkerCard } from "./parts";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
-import { getAllWorkers } from "@/api/fetchWorkers";
+import { getWorkersByPagination } from "@/api/fetchWorkers";
 
 const Workers = () => {
   const [workers, setWorkers] = useState<Workers[]>([]);
 
   useEffect(() => {
-    getAllWorkers().then((data) => setWorkers(data));
+    getWorkersByPagination(1, 4).then((data) => setWorkers(data));
   }, []);
 
   return (

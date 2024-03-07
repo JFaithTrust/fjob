@@ -1,48 +1,32 @@
-import { getAllWorkers } from "@/api/fetchWorkers";
+import { getCountOfAllWorkers } from "@/api/fetchWorkers";
 import { Partners, WorkerCard } from "@/components/parts";
 import CustomPagination from "@/components/ui/custom-pagination";
 import { Input } from "@/components/ui/input";
 import { Workers } from "@/types";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import Filter from "@/components/parts/filters/filter.tsx";
 
 const Workers = () => {
   const [workers, setWorkers] = useState<Workers[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const usersPerPage = 2;
-  // const lastUsersIndex = currentPage * usersPerPage;
-  // const firstUserIndex = lastUsersIndex - usersPerPage;
-  // const currentUsers = jobs.slice(firstUserIndex, lastUsersIndex);
-
-  // const highlightSearchTerm = (text: string, term: string) => {
-  //   const regex = new RegExp(`(${term})`, "gi");
-  //   return text.split(regex).map((part, index) => (
-  //     <span
-  //       key={index}
-  //       className={
-  //         part.toLowerCase() === term.toLowerCase() ? "bg-typeyellow" : ""
-  //       }
-  //     >
-  //       {part}
-  //     </span>
-  //   ));
-  // };
+  const [count, setCount] = useState(0)
+  const usersPerPage = 9;
 
   useEffect(() => {
-    getAllWorkers().then((data) => setWorkers(data));
+    getCountOfAllWorkers().then(count => setCount(count));
   }, []);
 
   // useEffect(() => {
-  //   getAllJobsByQueryParams(currentPage).then((data) => setJobs(data));
-  // }, [currentPage])
-  
+  //   console.log(valuec);
+  // }, [valuec]);
+
   return (
     <div className="flex flex-col gap-y-8 mt-8">
       <div className="py-8 bg-lightblue">
         <div className="flex flex-col gap-y-8 container">
           <h1 className="text-5xl font-semibold text-darkindigo">Workers</h1>
-          <div className="flex items-center py-4 justify-end">
+          <div className="flex items-center py-4 justify-end"> {/* Search bar */}
             <Input
               placeholder="Enter name..."
               value={searchTerm}
@@ -50,24 +34,31 @@ const Workers = () => {
               className="max-w-sm"
             />
           </div>
-          <div className="flex flex-col">
-            <div className="grid grid-cols-4 gap-3 w-full">
-              {workers
-                ?.filter((user) =>
-                  user.title
-                    ?.toLowerCase()
-                    // .includes(searchTerm.toLowerCase())
-                    .replace(/\s+/g, "")
-                    .includes(searchTerm.toLowerCase().replace(/\s+/g, ""))
-                )
-                .map((w) => (
-                  <WorkerCard worker={w} key={w.id} />
-                ))}
+          <div className="grid grid-cols-6 gap-x-4">
+            <Filter
+              setFilteredObjects={setWorkers}
+              pageNumber={currentPage}
+              pageSize={usersPerPage}
+            />
+            <div className={`flex flex-col col-span-5`}>
+              <div className="grid grid-cols-4 gap-3 w-full">
+                {workers
+                  ?.filter((user) =>
+                    user.title
+                      ?.toLowerCase()
+                      // .includes(searchTerm.toLowerCase())
+                      .replace(/\s+/g, "")
+                      .includes(searchTerm.toLowerCase().replace(/\s+/g, ""))
+                  )
+                  .map((w) => (
+                    <WorkerCard worker={w} key={w.id} />
+                  ))}
+              </div>
             </div>
             <div className="flex items-center py-4 justify-end">
-              {workers.length > usersPerPage && (
+              {count > usersPerPage && (
                 <CustomPagination
-                  totalPosts={workers.length}
+                  totalPosts={count}
                   postsPerPage={usersPerPage}
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
