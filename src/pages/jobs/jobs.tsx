@@ -5,8 +5,8 @@ import {
   getJobByCatergoryId,
   getJobsByDistrictId,
   getJobsByGender,
-  getJobsByMaxAndMinAge,
-  getJobsByMaxAndMinSalary,
+  // getJobsByMaxAndMinAge,
+  // getJobsByMaxAndMinSalary,
   getJobsByPagination,
   getJobsByRegionId,
 } from "@/api/fetchJobs";
@@ -52,11 +52,11 @@ const Jobs = () => {
   const [valued, setValued] = useState("");
   const [count, setCount] = useState(0);
   // max and min salary states
-  const [minSalary, setMinSalary] = useState(0);
-  const [maxSalary, setMaxSalary] = useState(0);
+  // const [minSalary, setMinSalary] = useState(0);
+  // const [maxSalary, setMaxSalary] = useState(0);
   // min and max age states
-  const [minAge, setMinAge] = useState(0);
-  const [maxAge, setMaxAge] = useState(0);
+  // const [minAge, setMinAge] = useState(0);
+  // const [maxAge, setMaxAge] = useState(0);
   // gender state
   const [currentGender, setCunrrentGender] = useState("Tanlanmagan");
 
@@ -148,29 +148,29 @@ const Jobs = () => {
   }, [valued]);
 
   // submit min and max salary
-  const handleSubmitMinMaxSalary = () => {
-    if (minSalary > maxSalary) {
-      toast.error("Maosh chegarasi noto'g'ri kiritildi!");
-      return;
-    }
-    getJobsByMaxAndMinSalary(
-      minSalary,
-      maxSalary,
-      currentPage,
-      usersPerPage
-    ).then((data) => setJobs(data));
-  };
+  // const handleSubmitMinMaxSalary = () => {
+  //   if (minSalary > maxSalary) {
+  //     toast.error("Maosh chegarasi noto'g'ri kiritildi!");
+  //     return;
+  //   }
+  //   getJobsByMaxAndMinSalary(
+  //     minSalary,
+  //     maxSalary,
+  //     currentPage,
+  //     usersPerPage
+  //   ).then((data) => setJobs(data));
+  // };
 
   // submit min and max age
-  const handleSubmitMinMaxAge = () => {
-    if (minAge > maxAge) {
-      toast.error("Yosh chegarasi noto'g'ri kiritildi!");
-      return;
-    }
-    getJobsByMaxAndMinAge(minAge, maxAge, currentPage, usersPerPage).then(
-      (data) => setJobs(data)
-    );
-  };
+  // const handleSubmitMinMaxAge = () => {
+  //   if (minAge > maxAge) {
+  //     toast.error("Yosh chegarasi noto'g'ri kiritildi!");
+  //     return;
+  //   }
+  //   getJobsByMaxAndMinAge(minAge, maxAge, currentPage, usersPerPage).then(
+  //     (data) => setJobs(data)
+  //   );
+  // };
 
   // submit by gender
   const handleSubmitGender = (gender: string) => {
@@ -226,21 +226,13 @@ const Jobs = () => {
                     <Input
                       placeholder="Min"
                       type="number"
-                      onChange={(e) => setMinSalary(parseInt(e.target.value))}
+                      // onChange={(e) => setMinSalary(parseInt(e.target.value))}
                     />
                     <Input
                       placeholder="Max"
                       type="number"
-                      onChange={(e) => setMaxSalary(parseInt(e.target.value))}
+                      // onChange={(e) => setMaxSalary(parseInt(e.target.value))}
                     />
-                  </div>
-                  <div className="h-full col-span-1 flex items-end">
-                    <Button
-                      className="h-fit items-end px-3 py-1 rounded-2xl"
-                      onClick={handleSubmitMinMaxSalary}
-                    >
-                      Go
-                    </Button>
                   </div>
                 </div>
               </div>
@@ -254,23 +246,15 @@ const Jobs = () => {
                     <Input
                       placeholder="Min"
                       type="number"
-                      onChange={(e) => setMinAge(parseInt(e.target.value))}
+                      // onChange={(e) => setMinAge(parseInt(e.target.value))}
                     />
                   </div>
                   <div className="col-span-1">
                     <Input
                       placeholder="Max"
                       type="number"
-                      onChange={(e) => setMaxAge(parseInt(e.target.value))}
+                      // onChange={(e) => setMaxAge(parseInt(e.target.value))}
                     />
-                  </div>
-                  <div className="h-full col-span-1 flex items-end">
-                    <Button
-                      className="h-fit items-end px-3 py-1 rounded-2xl"
-                      onClick={handleSubmitMinMaxAge}
-                    >
-                      Go
-                    </Button>
                   </div>
                 </div>
               </div>
