@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import {
   getExperienceByWorkerId,
   getWorkerById,
-  getWorkesByCategoryId,
+  getWorkersByCategoryId,
 } from "@/api/fetchWorkers";
 
 const WorkerDetail = () => {
@@ -44,7 +44,7 @@ const WorkerDetail = () => {
         setDistrict(district);
         const region = await getRegionByDistrictId(district.id);
         setRegion(region);
-        const categoryWorker = await getWorkesByCategoryId(worker.categoryId);
+        const categoryWorker = await getWorkersByCategoryId(worker.categoryId);
         setCategoryWorkers(categoryWorker);
         const experiences = await getExperienceByWorkerId(worker.id);
         setExperiences(experiences);
