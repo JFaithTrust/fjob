@@ -28,9 +28,7 @@ export const getCountOfAllJobs = async (): Promise<number> => {
   return data;
 };
 
-export const getAllJobsFiltered = async (params: Map<string, string>, pageSize: number) => {
-  params.set("pageNumber", "1")
-  params.set("pageSize", pageSize.toString())
+export const getAllJobsFiltered = async (params: Map<string, string>) => {
   const { data } = await axios.get(`/api/Job/GetAll?${getQuery(params)}`)
   return data;
 }

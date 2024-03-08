@@ -29,9 +29,7 @@ export const getCountOfAllWorkers = async (): Promise<number> => {
   const { data } = await axios.get("/api/Worker/GetCount");
   return data;
 }
-export const getAllWorkersFiltered = async (params: Map<string, string>, pageSize: number) => {
-  params.set("pageNumber", "1")
-  params.set("pageSize", pageSize.toString())
+export const getAllWorkersFiltered = async (params: Map<string, string>) => {
   const { data } = await axios.get(`/api/Worker/GetAll?${getQuery(params)}`)
   return data;
 }

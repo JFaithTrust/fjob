@@ -17,10 +17,11 @@ import { getAllJobsFiltered } from "@/api/fetchJobs.ts";
 interface FilterProps {
   setWorkers?: (workers: SetStateAction<Worker[]>) => void,
   setJobs?: (jobs: SetStateAction<Job[]>) => void,
+  pageNumber: number
   pageSize: number
 }
 
-const Filter = ({setWorkers, setJobs, pageSize}: FilterProps) => {
+const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
   const [openc, setOpenc] = useState(false);
   const [valuec, setValuec] = useState("");
   const [openr, setOpenr] = useState(false);
@@ -56,14 +57,20 @@ const Filter = ({setWorkers, setJobs, pageSize}: FilterProps) => {
         })
     }
     if (setWorkers){
-      getAllWorkersFiltered(params, pageSize)
+      getAllWorkersFiltered(params)
         .then((workers) => {
           setWorkers(workers)
         })
     }
   }, [params]);
+  useEffect(() => {
+    putParams("pageNumber", pageNumber.toString())
+  }, [pageNumber]);
 
   function putParams(key: string, value: string) {
+    if (!params.has("pageSize")){
+      params.set("pageSize", pageSize.toString())
+    }
     const newMap: Map<string, string> = new Map(params);
     if (value.length > 0) {
       newMap.set(key, value);

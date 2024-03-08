@@ -11,7 +11,7 @@ const Workers = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0)
-  const usersPerPage = 9;
+  const usersPerPage = 1;
 
   useEffect(() => {
     getCountOfAllWorkers().then(count => setCount(count));
@@ -33,7 +33,7 @@ const Workers = () => {
           <div className="grid grid-cols-6 gap-x-4">
             <Filter
               setWorkers={setWorkers}
-              setPageNumber={setCurrentPage}
+              pageNumber={currentPage}
               pageSize={usersPerPage} />
             <div className={`flex flex-col col-span-5`}>
               <div className="grid grid-cols-4 gap-3 w-full">
