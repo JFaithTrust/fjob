@@ -38,6 +38,7 @@ const Workers = () => {
             <Filter
               setFilteredObjects={setWorkers}
               pageNumber={currentPage}
+              setPageNumber={setCurrentPage}
               pageSize={usersPerPage}
             />
             <div className={`flex flex-col col-span-5`}>

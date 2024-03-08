@@ -7,7 +7,7 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 import { cn } from "@/lib/utils.ts";
 import { SetStateAction, useEffect, useState } from "react";
 import { Category, District, Region, Workers } from "@/types";
-import { getAllWorkersFiltered, getWorkersByPagination } from "@/api/fetchWorkers.ts";
+import { getAllWorkersFiltered } from "@/api/fetchWorkers.ts";
 import { getAllCategory } from "@/api/fetchCategory.ts";
 import { getAllRegion } from "@/api/fetchRegion.ts";
 import { getDistrictByRegionId } from "@/api/fetchDistrict.ts";
@@ -15,10 +15,11 @@ import { getDistrictByRegionId } from "@/api/fetchDistrict.ts";
 interface FilterProps {
   setFilteredObjects: (objects: SetStateAction<Workers[]>) => void,
   pageNumber: number,
+  setPageNumber: (pageNumber: SetStateAction<number>) => void,
   pageSize: number
 }
 
-const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
+const Filter = ({setFilteredObjects, pageNumber, setPageNumber, pageSize}: FilterProps) => {
   const [openc, setOpenc] = useState(false);
   const [valuec, setValuec] = useState("");
   const [openr, setOpenr] = useState(false);
@@ -35,12 +36,14 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
 
 
   useEffect(() => {
-    getWorkersByPagination(pageNumber, pageSize).then((workers) =>
-      setFilteredObjects(workers)
-    );
+    putParams("pageNumber", pageSize.toString())
+    putParams("pageSize", pageSize.toString())
+  }, [pageNumber]);
+
+  useEffect(() => {
     getAllCategory().then((categories) => setAllCategory(categories));
     getAllRegion().then((regions) => setRegions(regions));
-  }, [pageNumber]);
+  }, []);
 
   useEffect(() => {
     if (valuer) {
@@ -56,6 +59,7 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
     getAllWorkersFiltered(params)
       .then((workers) => {
         setFilteredObjects(workers)
+        setPageNumber(1)
       })
   }, [params]);
 
