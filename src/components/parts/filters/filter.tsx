@@ -67,6 +67,7 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
         })
     }
   }, [params]);
+
   useEffect(() => {
     putParams("pageNumber", pageNumber.toString())
   }, [pageNumber]);
