@@ -11,7 +11,7 @@ const Workers = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0)
-  const usersPerPage = 1;
+  const usersPerPage = 9;
 
   useEffect(() => {
     getCountOfAllWorkers().then(count => setCount(count));
