@@ -9,10 +9,12 @@ import {
   Workers,
 } from "./pages";
 import WorkerDetail from "./pages/workers/worker-detail";
+import { Toaster } from "@/components/ui/sonner"
 
 function App() {
   return (
     <div className="h-full">
+      <Toaster richColors />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

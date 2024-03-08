@@ -11,6 +11,7 @@ import { getAllWorkersFiltered } from "@/api/fetchWorkers.ts";
 import { getAllCategory } from "@/api/fetchCategory.ts";
 import { getAllRegion } from "@/api/fetchRegion.ts";
 import { getDistrictByRegionId } from "@/api/fetchDistrict.ts";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group.tsx";
 
 interface FilterProps {
   setFilteredObjects: (objects: SetStateAction<Worker[]>) => void,
@@ -31,6 +32,7 @@ const Filter = ({setFilteredObjects, pageNumber, setPageNumber, pageSize}: Filte
   // const [count, setCount] = useState(0)
   const [regions, setRegions] = useState<Region[]>([]);
   const [params, setParams] = useState(new Map<string, string>())
+  const [currentGender, setCurrentGender] = useState("")
 
 
 
@@ -74,6 +76,14 @@ const Filter = ({setFilteredObjects, pageNumber, setPageNumber, pageSize}: Filte
     }
     setParams(newMap)
   }
+  const handleSubmitGender = (gender: string) => {
+    if (gender === currentGender) {
+      putParams("gender", "")
+    }else {
+      putParams("gender", gender)
+    }
+    setCurrentGender(gender)
+  };
 
   return (
     <div className="col-span-1 flex flex-col gap-y-4">
@@ -131,22 +141,26 @@ const Filter = ({setFilteredObjects, pageNumber, setPageNumber, pageSize}: Filte
           Jins
         </Label>
         <div className="grid grid-cols-2 gap-x-2">
-          <div className="col-span-1">
-            <Button
-              variant={"active-outline"}
-              className="items-end px-3 py-1 rounded-xl"
+          <ToggleGroup type="single">
+            <ToggleGroupItem
+              value="bold"
+              aria-label="Toggle bold"
+              className="col-span-1 px-3 py-1 rounded-xl"
+              variant={"outline"}
+              onClick={() => handleSubmitGender("Erkak")}
             >
               Erkak
-            </Button>
-          </div>
-          <div className="col-span-1">
-            <Button
-              variant={"active-outline"}
-              className="items-end px-3 py-1 rounded-xl"
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="italic"
+              aria-label="Toggle italic"
+              className="col-span-1 px-3 py-1 rounded-xl"
+              variant={"outline"}
+              onClick={() => handleSubmitGender("Ayol")}
             >
               Ayol
-            </Button>
-          </div>
+            </ToggleGroupItem>
+          </ToggleGroup>
         </div>
       </div>
       {/* Category Combobox */}

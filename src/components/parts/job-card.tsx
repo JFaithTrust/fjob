@@ -55,7 +55,7 @@ const JobCard = ({ job }: Job) => {
             <div className={`flex`}>
               <IoLocationOutline />
               <span className="text-base leading-none font-normal text-gray-600">
-                {district.name}, {region.name}
+              {region.name} {district.name}
               </span>
             </div>
           )}
