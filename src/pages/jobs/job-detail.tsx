@@ -3,7 +3,7 @@ import { getDistrictById } from "@/api/fetchDistrict";
 import { getJobByCatergoryId, getJobById } from "@/api/fetchJobs";
 import { getRegionByDistrictId } from "@/api/fetchRegion";
 import { JobCard, Partners } from "@/components/parts";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Category, District, Jobs, Region } from "@/types";
 import { useState, useEffect } from "react";
@@ -39,7 +39,7 @@ const JobDetail = () => {
         setDistrict(district);
         const region = await getRegionByDistrictId(district.id);
         setRegion(region);
-        const categoryJob = await getJobByCatergoryId(job.categoryId);
+        const categoryJob = await getJobByCatergoryId(job.categoryId, 1, 5);
         setCategoryJobs(categoryJob);
         // const API_KEY = "AIzaSyAcfsk4C5rdqDe-TAtNFEQjcC6Vsak-zu4";
         // const url =
@@ -63,11 +63,9 @@ const JobDetail = () => {
           <div className="flex flex-col gap-y-6 bg-white p-12 col-span-2 justify-start rounded-xl">
             <div className="flex flex-row gap-x-6 items-center">
               <Avatar>
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>
+                  {job?.title?.charAt(0)}
+                </AvatarFallback>
               </Avatar>
               <h1 className="text-darkindigo font-bold text-lg">
                 {job?.title}
@@ -404,9 +402,12 @@ const JobDetail = () => {
             </div>
           </div>
           <div className="flex flex-col gap-y-6 col-span-1 rounded-xl">
-            {categoryJobs?.slice(0, 5).filter((item) => item.id !== job?.id).map((item) => (
-              <JobCard job={item} key={item.id} />
-            ))}
+            {categoryJobs
+              ?.slice(0, 5)
+              .filter((item) => item.id !== job?.id)
+              .map((item) => (
+                <JobCard job={item} key={item.id} />
+              ))}
           </div>
         </div>
       </div>
