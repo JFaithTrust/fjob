@@ -6,21 +6,22 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command.tsx";
 import { cn } from "@/lib/utils.ts";
 import { SetStateAction, useEffect, useState } from "react";
-import { Category, District, Region, Worker } from "@/types";
+import { Category, District, Job, Region, Worker } from "@/types";
 import { getAllWorkersFiltered } from "@/api/fetchWorkers.ts";
 import { getAllCategory } from "@/api/fetchCategory.ts";
 import { getAllRegion } from "@/api/fetchRegion.ts";
 import { getDistrictByRegionId } from "@/api/fetchDistrict.ts";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group.tsx";
+import { getAllJobsFiltered } from "@/api/fetchJobs.ts";
 
 interface FilterProps {
-  setFilteredObjects: (objects: SetStateAction<Worker[]>) => void,
-  pageNumber: number,
+  setWorkers?: (workers: SetStateAction<Worker[]>) => void,
+  setJobs?: (jobs: SetStateAction<Job[]>) => void,
   setPageNumber: (pageNumber: SetStateAction<number>) => void,
   pageSize: number
 }
 
-const Filter = ({setFilteredObjects, pageNumber, setPageNumber, pageSize}: FilterProps) => {
+const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => {
   const [openc, setOpenc] = useState(false);
   const [valuec, setValuec] = useState("");
   const [openr, setOpenr] = useState(false);
@@ -37,10 +38,6 @@ const Filter = ({setFilteredObjects, pageNumber, setPageNumber, pageSize}: Filte
 
 
 
-  useEffect(() => {
-    putParams("pageNumber", pageSize.toString())
-    putParams("pageSize", pageSize.toString())
-  }, [pageNumber]);
 
   useEffect(() => {
     getAllCategory().then((categories) => setAllCategory(categories));
@@ -57,12 +54,19 @@ const Filter = ({setFilteredObjects, pageNumber, setPageNumber, pageSize}: Filte
   }, [valuer]);
 
   useEffect(() => {
-    console.log("use effect")
-    getAllWorkersFiltered(params)
-      .then((workers) => {
-        setFilteredObjects(workers)
-        setPageNumber(1)
-      })
+    setPageNumber(1)
+    if (setJobs){
+      getAllJobsFiltered(params, pageSize)
+        .then((jobs) => {
+          setJobs(jobs)
+        })
+    }
+    if (setWorkers){
+      getAllWorkersFiltered(params, pageSize)
+        .then((workers) => {
+          setWorkers(workers)
+        })
+    }
   }, [params]);
 
   function putParams(key: string, value: string) {
@@ -103,11 +107,6 @@ const Filter = ({setFilteredObjects, pageNumber, setPageNumber, pageSize}: Filte
                      event => putParams("maxSalary", event.target.value)
                    } />
           </div>
-          <div className="h-full col-span-1 flex items-end">
-            <Button className="h-fit items-end px-3 py-1 rounded-2xl">
-              Go
-            </Button>
-          </div>
         </div>
       </div>
       {/* Age */}
@@ -127,11 +126,6 @@ const Filter = ({setFilteredObjects, pageNumber, setPageNumber, pageSize}: Filte
                    onChange={
                      event => putParams("maxAge", event.target.value)
                    } />
-          </div>
-          <div className="h-full col-span-1 flex items-end">
-            <Button className="h-fit items-end px-3 py-1 rounded-2xl">
-              Go
-            </Button>
           </div>
         </div>
       </div>

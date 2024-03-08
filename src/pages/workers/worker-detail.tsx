@@ -4,7 +4,7 @@ import { getRegionByDistrictId } from "@/api/fetchRegion";
 import { Partners, WorkerCard } from "@/components/parts";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Category, District, Experience, Region, Workers } from "@/types";
+import { Category, District, Experience, Region, Worker } from "@/types";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { format } from "date-fns";
@@ -16,11 +16,11 @@ import {
 } from "@/api/fetchWorkers";
 
 const WorkerDetail = () => {
-  const [worker, setWorker] = useState<Workers>();
+  const [worker, setWorker] = useState<Worker>();
   const [category, setCategory] = useState<Category>();
   const [district, setDistrict] = useState<District>();
   const [region, setRegion] = useState<Region>();
-  const [categoryWorkers, setCategoryWorkers] = useState<Workers[]>();
+  const [categoryWorkers, setCategoryWorkers] = useState<Worker[]>();
   const [experiences, setExperiences] = useState<Experience[]>();
   // const [iframeUrl, setIframeUrl] = useState("");
 

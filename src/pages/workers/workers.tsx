@@ -17,10 +17,6 @@ const Workers = () => {
     getCountOfAllWorkers().then(count => setCount(count));
   }, []);
 
-  // useEffect(() => {
-  //   console.log(valuec);
-  // }, [valuec]);
-
   return (
     <div className="flex flex-col gap-y-8 mt-8">
       <div className="py-8 bg-lightblue">
@@ -36,11 +32,9 @@ const Workers = () => {
           </div>
           <div className="grid grid-cols-6 gap-x-4">
             <Filter
-              setFilteredObjects={setWorkers}
-              pageNumber={currentPage}
+              setWorkers={setWorkers}
               setPageNumber={setCurrentPage}
-              pageSize={usersPerPage}
-            />
+              pageSize={usersPerPage} />
             <div className={`flex flex-col col-span-5`}>
               <div className="grid grid-cols-4 gap-3 w-full">
                 {workers

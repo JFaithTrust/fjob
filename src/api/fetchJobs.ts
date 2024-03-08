@@ -1,4 +1,4 @@
-import { Jobs } from "@/types";
+import { Job } from "@/types";
 import axios from "./axios";
 
 // export const getAllJobs =async (): Promise<Jobs[]> => {
@@ -6,7 +6,7 @@ import axios from "./axios";
 //     return data;
 // }
 
-export const getJobById = async (id: string): Promise<Jobs> => {
+export const getJobById = async (id: string): Promise<Job> => {
   const { data } = await axios.get(`/api/Job/GetById/${id}`);
   return data;
 };
@@ -15,7 +15,7 @@ export const getJobById = async (id: string): Promise<Jobs> => {
 export const getJobsByPagination = async (
   pageNumber: number,
   pageSize: number
-): Promise<Jobs[]> => {
+): Promise<Job[]> => {
   const { data } = await axios.get(
     `/api/Job/GetAll?pageNumber=${pageNumber}&pageSize=${pageSize}`
   );
@@ -28,76 +28,25 @@ export const getCountOfAllJobs = async (): Promise<number> => {
   return data;
 };
 
-// get jobs by max and min salary and pagination params
-export const getJobsByMaxAndMinSalary = async (
-  minSalary: number,
-  maxSalary: number,
-  pageNumber: number,
-  pageSize: number
-): Promise<Jobs[]> => {
-  const { data } = await axios.get(
-    `/api/Job/GetAll?minSalary=${minSalary}&maxSalary=${maxSalary}&pageNumber=${pageNumber}&pageSize=${pageSize}`
-  );
+export const getAllJobsFiltered = async (params: Map<string, string>, pageSize: number) => {
+  params.set("pageNumber", "1")
+  params.set("pageSize", pageSize.toString())
+  const { data } = await axios.get(`/api/Job/GetAll?${getQuery(params)}`)
   return data;
-};
-
-// get jobs by max and min age and pagination params
-export const getJobsByMaxAndMinAge = async (
-  minAge: number,
-  maxAge: number,
-  pageNumber: number,
-  pageSize: number
-): Promise<Jobs[]> => {
-  const { data } = await axios.get(
-    `/api/Job/GetAll?minAge=${minAge}&maxAge=${maxAge}&pageNumber=${pageNumber}&pageSize=${pageSize}`
-  );
-  return data;
-};
-
-// get jobs by gender and pagination params
-export const getJobsByGender = async (
-  gender: string,
-  pageNumber: number,
-  pageSize: number
-): Promise<Jobs[]> => {
-  const { data } = await axios.get(
-    `/api/Job/GetAll?gender=${gender}&pageNumber=${pageNumber}&pageSize=${pageSize}`
-  );
-  return data;
-};
-
-// getJobByCatergoryId and pagination params
-export const getJobByCatergoryId = async (
+}
+export const getJobByCategoryId = async (
   id: string,
   pageNumber: number,
   pageSize: number
-): Promise<Jobs[]> => {
+): Promise<Job[]> => {
   const { data } = await axios.get(
     `/api/Job/GetAll?jobCategoryId=${id}&pageNumber=${pageNumber}&pageSize=${pageSize}`
   );
   return data;
 };
 
-// get jobs by region id and pagination params
-export const getJobsByRegionId = async (
-  id: string,
-  pageNumber: number,
-  pageSize: number
-): Promise<Jobs[]> => {
-  const { data } = await axios.get(
-    `/api/Job/GetAll?regionId=${id}&pageNumber=${pageNumber}&pageSize=${pageSize}`
-  );
-  return data;
-};
-
-// get jobs by region id , district id and pagination params
-export const getJobsByDistrictId = async (
-  districtId: string,
-  pageNumber: number,
-  pageSize: number
-): Promise<Jobs[]> => {
-  const { data } = await axios.get(
-    `/api/Job/GetAll?districtId=${districtId}&pageNumber=${pageNumber}&pageSize=${pageSize}`
-  );
-  return data;
-};
+const getQuery = (params: Map<string, string>): string => {
+  return [...params.entries()]
+    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+    .join('&');
+}

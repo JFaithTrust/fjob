@@ -1,4 +1,4 @@
-import { Jobs } from "@/types";
+import { Job } from "@/types";
 import { JobCard } from "./parts";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
@@ -6,7 +6,7 @@ import { getJobsByPagination } from "@/api/fetchJobs";
 import { useNavigate } from "react-router-dom";
 
 const Jobs = () => {
-  const [jobs, setJobs] = useState<Jobs[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
