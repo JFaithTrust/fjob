@@ -2,12 +2,12 @@ import { getCountOfAllWorkers } from "@/api/fetchWorkers";
 import { Partners, WorkerCard } from "@/components/parts";
 import CustomPagination from "@/components/ui/custom-pagination";
 import { Input } from "@/components/ui/input";
-import { Workers } from "@/types";
+import { Worker } from "@/types";
 import { useEffect, useState } from "react";
 import Filter from "@/components/parts/filters/filter.tsx";
 
 const Workers = () => {
-  const [workers, setWorkers] = useState<Workers[]>([]);
+  const [workers, setWorkers] = useState<Worker[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0)
@@ -16,10 +16,6 @@ const Workers = () => {
   useEffect(() => {
     getCountOfAllWorkers().then(count => setCount(count));
   }, []);
-
-  // useEffect(() => {
-  //   console.log(valuec);
-  // }, [valuec]);
 
   return (
     <div className="flex flex-col gap-y-8 mt-8">
@@ -36,10 +32,9 @@ const Workers = () => {
           </div>
           <div className="grid grid-cols-6 gap-x-4">
             <Filter
-              setFilteredObjects={setWorkers}
-              pageNumber={currentPage}
-              pageSize={usersPerPage}
-            />
+              setWorkers={setWorkers}
+              setPageNumber={setCurrentPage}
+              pageSize={usersPerPage} />
             <div className={`flex flex-col col-span-5`}>
               <div className="grid grid-cols-4 gap-3 w-full">
                 {workers

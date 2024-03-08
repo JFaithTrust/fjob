@@ -1,22 +1,22 @@
 import { getCategoryById } from "@/api/fetchCategory";
 import { getDistrictById } from "@/api/fetchDistrict";
-import { getJobByCatergoryId, getJobById } from "@/api/fetchJobs";
+import { getJobByCategoryId, getJobById } from "@/api/fetchJobs";
 import { getRegionByDistrictId } from "@/api/fetchRegion";
 import { JobCard, Partners } from "@/components/parts";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Category, District, Jobs, Region } from "@/types";
+import { Category, District, Job, Region } from "@/types";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 
 const JobDetail = () => {
-  const [job, setJob] = useState<Jobs>();
+  const [job, setJob] = useState<Job>();
   const [category, setCategory] = useState<Category>();
   const [district, setDistrict] = useState<District>();
   const [region, setRegion] = useState<Region>();
-  const [categoryJobs, setCategoryJobs] = useState<Jobs[]>();
+  const [categoryJobs, setCategoryJobs] = useState<Job[]>();
   // const [iframeUrl, setIframeUrl] = useState("");
 
   const { jobId } = useParams();
@@ -39,7 +39,7 @@ const JobDetail = () => {
         setDistrict(district);
         const region = await getRegionByDistrictId(district.id);
         setRegion(region);
-        const categoryJob = await getJobByCatergoryId(job.categoryId, 1, 5);
+        const categoryJob = await getJobByCategoryId(job.categoryId, 1, 5);
         setCategoryJobs(categoryJob);
         // const API_KEY = "AIzaSyAcfsk4C5rdqDe-TAtNFEQjcC6Vsak-zu4";
         // const url =

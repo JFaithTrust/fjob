@@ -6,19 +6,22 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command.tsx";
 import { cn } from "@/lib/utils.ts";
 import { SetStateAction, useEffect, useState } from "react";
-import { Category, District, Region, Workers } from "@/types";
-import { getAllWorkersFiltered, getWorkersByPagination } from "@/api/fetchWorkers.ts";
+import { Category, District, Job, Region, Worker } from "@/types";
+import { getAllWorkersFiltered } from "@/api/fetchWorkers.ts";
 import { getAllCategory } from "@/api/fetchCategory.ts";
 import { getAllRegion } from "@/api/fetchRegion.ts";
 import { getDistrictByRegionId } from "@/api/fetchDistrict.ts";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group.tsx";
+import { getAllJobsFiltered } from "@/api/fetchJobs.ts";
 
 interface FilterProps {
-  setFilteredObjects: (objects: SetStateAction<Workers[]>) => void,
-  pageNumber: number,
+  setWorkers?: (workers: SetStateAction<Worker[]>) => void,
+  setJobs?: (jobs: SetStateAction<Job[]>) => void,
+  setPageNumber: (pageNumber: SetStateAction<number>) => void,
   pageSize: number
 }
 
-const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
+const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => {
   const [openc, setOpenc] = useState(false);
   const [valuec, setValuec] = useState("");
   const [openr, setOpenr] = useState(false);
@@ -30,17 +33,16 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
   // const [count, setCount] = useState(0)
   const [regions, setRegions] = useState<Region[]>([]);
   const [params, setParams] = useState(new Map<string, string>())
+  const [currentGender, setCurrentGender] = useState("")
+
 
 
 
 
   useEffect(() => {
-    getWorkersByPagination(pageNumber, pageSize).then((workers) =>
-      setFilteredObjects(workers)
-    );
     getAllCategory().then((categories) => setAllCategory(categories));
     getAllRegion().then((regions) => setRegions(regions));
-  }, [pageNumber]);
+  }, []);
 
   useEffect(() => {
     if (valuer) {
@@ -52,11 +54,19 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
   }, [valuer]);
 
   useEffect(() => {
-    console.log("use effect")
-    getAllWorkersFiltered(params)
-      .then((workers) => {
-        setFilteredObjects(workers)
-      })
+    setPageNumber(1)
+    if (setJobs){
+      getAllJobsFiltered(params, pageSize)
+        .then((jobs) => {
+          setJobs(jobs)
+        })
+    }
+    if (setWorkers){
+      getAllWorkersFiltered(params, pageSize)
+        .then((workers) => {
+          setWorkers(workers)
+        })
+    }
   }, [params]);
 
   function putParams(key: string, value: string) {
@@ -70,6 +80,14 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
     }
     setParams(newMap)
   }
+  const handleSubmitGender = (gender: string) => {
+    if (gender === currentGender) {
+      putParams("gender", "")
+    }else {
+      putParams("gender", gender)
+    }
+    setCurrentGender(gender)
+  };
 
   return (
     <div className="col-span-1 flex flex-col gap-y-4">
@@ -88,11 +106,6 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
                    onChange={
                      event => putParams("maxSalary", event.target.value)
                    } />
-          </div>
-          <div className="h-full col-span-1 flex items-end">
-            <Button className="h-fit items-end px-3 py-1 rounded-2xl">
-              Go
-            </Button>
           </div>
         </div>
       </div>
@@ -114,11 +127,6 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
                      event => putParams("maxAge", event.target.value)
                    } />
           </div>
-          <div className="h-full col-span-1 flex items-end">
-            <Button className="h-fit items-end px-3 py-1 rounded-2xl">
-              Go
-            </Button>
-          </div>
         </div>
       </div>
       {/* Gender */}
@@ -127,22 +135,26 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
           Jins
         </Label>
         <div className="grid grid-cols-2 gap-x-2">
-          <div className="col-span-1">
-            <Button
-              variant={"active-outline"}
-              className="items-end px-3 py-1 rounded-xl"
+          <ToggleGroup type="single">
+            <ToggleGroupItem
+              value="bold"
+              aria-label="Toggle bold"
+              className="col-span-1 px-3 py-1 rounded-xl"
+              variant={"outline"}
+              onClick={() => handleSubmitGender("Erkak")}
             >
               Erkak
-            </Button>
-          </div>
-          <div className="col-span-1">
-            <Button
-              variant={"active-outline"}
-              className="items-end px-3 py-1 rounded-xl"
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="italic"
+              aria-label="Toggle italic"
+              className="col-span-1 px-3 py-1 rounded-xl"
+              variant={"outline"}
+              onClick={() => handleSubmitGender("Ayol")}
             >
               Ayol
-            </Button>
-          </div>
+            </ToggleGroupItem>
+          </ToggleGroup>
         </div>
       </div>
       {/* Category Combobox */}

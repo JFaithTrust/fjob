@@ -1,11 +1,11 @@
-import { Workers } from "@/types";
+import { Worker } from "@/types";
 import { WorkerCard } from "./parts";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 import { getWorkersByPagination } from "@/api/fetchWorkers";
 
 const Workers = () => {
-  const [workers, setWorkers] = useState<Workers[]>([]);
+  const [workers, setWorkers] = useState<Worker[]>([]);
 
   useEffect(() => {
     getWorkersByPagination(1, 4).then((data) => setWorkers(data));

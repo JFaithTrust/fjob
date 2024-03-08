@@ -1,4 +1,4 @@
-export interface Jobs{
+class BaseObject {
     id: string;
     title: string;
     gender: string;
@@ -9,6 +9,12 @@ export interface Jobs{
     telegramLink: string;
     instagramLink: string;
     tgUsername: string;
+    categoryId: string;
+    districtId: string;
+    createDate: Date;
+}
+
+export class Job extends BaseObject{
     phoneNumber: string;
     benefit: string;
     requirement: string;
@@ -16,32 +22,16 @@ export interface Jobs{
     maxAge: number;
     latitude?: number;
     longitude?: number;
-    categoryId: string;
-    districtId: string;
-    createDate: Date;
 }
 
-export interface Workers{
-    id: string;
+export class Worker extends BaseObject{
     createdBy: string;
     createdDate: Date;
-    deadline: Date;
     birthDate: Date;
     fullName: string;
     username: string;
-    title: string;
-    salary: number;
-    gender: string;
-    workingTime: string;
-    workingSchedule: string;
-    telegramLink: string;
-    instagramLink: string;
-    tgUsername: string;
     phoneNumber: string;
     location: string;
-    districtId: string;
-    categoryId: string;
-    createDate: Date;
 }
 
 export interface Experience{
