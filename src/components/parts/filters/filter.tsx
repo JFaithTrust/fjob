@@ -35,10 +35,6 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
   const [params, setParams] = useState(new Map<string, string>())
   const [currentGender, setCurrentGender] = useState("")
 
-
-
-
-
   useEffect(() => {
     getAllCategory().then((categories) => setAllCategory(categories));
     getAllRegion().then((regions) => setRegions(regions));
@@ -86,6 +82,7 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
     }
     setParams(newMap)
   }
+  
   const handleSubmitGender = (gender: string) => {
     if (gender === currentGender) {
       putParams("gender", "")
@@ -96,7 +93,7 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
   };
 
   return (
-    <div className="col-span-1 flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-4">
       {/* Salary */}
       <div>
         <Label className="text-base font-normal text-darkindigo">
@@ -140,8 +137,7 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
         <Label className="text-base font-normal text-darkindigo">
           Jins
         </Label>
-        <div className="grid grid-cols-2 gap-x-2">
-          <ToggleGroup type="single">
+          <ToggleGroup type="single" className="grid grid-cols-2 gap-x-2">
             <ToggleGroupItem
               value="bold"
               aria-label="Toggle bold"
@@ -161,7 +157,6 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
               Ayol
             </ToggleGroupItem>
           </ToggleGroup>
-        </div>
       </div>
       {/* Category Combobox */}
       <div>
@@ -192,6 +187,10 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
                     key={category.id}
                     value={category.title}
                     onSelect={(currentValue) => {
+                      putParams("jobCategoryId", 
+                        currentValue === valuec ? "" : allCategory.find((c) => c.title.toLocaleLowerCase() === currentValue)
+                        ?.id || ""
+                      )
                       setValuec(
                         currentValue === valuec ? "" : currentValue
                       );
@@ -245,6 +244,10 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
                     key={region.id}
                     value={region.name}
                     onSelect={(currentValue) => {
+                      putParams("regionId", 
+                        currentValue === valuer ? "" : regions.find((r) => r.name.toLocaleLowerCase() === currentValue)
+                        ?.id || ""
+                      )
                       setValuer(
                         currentValue === valuer ? "" : currentValue
                       );
@@ -296,6 +299,10 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
                     key={d.id}
                     value={d.name}
                     onSelect={(currentValue) => {
+                      putParams("districtId", 
+                        currentValue === valued ? "" : district.find((d) => d.name.toLocaleLowerCase() === currentValue)
+                        ?.id || ""
+                      )
                       setValued(
                         currentValue === valued ? "" : currentValue
                       );
