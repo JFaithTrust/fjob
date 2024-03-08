@@ -17,11 +17,10 @@ import { getAllJobsFiltered } from "@/api/fetchJobs.ts";
 interface FilterProps {
   setWorkers?: (workers: SetStateAction<Worker[]>) => void,
   setJobs?: (jobs: SetStateAction<Job[]>) => void,
-  setPageNumber: (pageNumber: SetStateAction<number>) => void,
   pageSize: number
 }
 
-const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => {
+const Filter = ({setWorkers, setJobs, pageSize}: FilterProps) => {
   const [openc, setOpenc] = useState(false);
   const [valuec, setValuec] = useState("");
   const [openr, setOpenr] = useState(false);
@@ -34,10 +33,6 @@ const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => 
   const [regions, setRegions] = useState<Region[]>([]);
   const [params, setParams] = useState(new Map<string, string>())
   const [currentGender, setCurrentGender] = useState("")
-
-
-
-
 
   useEffect(() => {
     getAllCategory().then((categories) => setAllCategory(categories));
@@ -54,9 +49,8 @@ const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => 
   }, [valuer]);
 
   useEffect(() => {
-    setPageNumber(1)
     if (setJobs){
-      getAllJobsFiltered(params, pageSize)
+      getAllJobsFiltered(params)
         .then((jobs) => {
           setJobs(jobs)
         })
@@ -80,6 +74,7 @@ const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => 
     }
     setParams(newMap)
   }
+  
   const handleSubmitGender = (gender: string) => {
     if (gender === currentGender) {
       putParams("gender", "")
@@ -90,7 +85,7 @@ const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => 
   };
 
   return (
-    <div className="col-span-1 flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-4">
       {/* Salary */}
       <div>
         <Label className="text-base font-normal text-darkindigo">
@@ -134,8 +129,7 @@ const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => 
         <Label className="text-base font-normal text-darkindigo">
           Jins
         </Label>
-        <div className="grid grid-cols-2 gap-x-2">
-          <ToggleGroup type="single">
+          <ToggleGroup type="single" className="grid grid-cols-2 gap-x-2">
             <ToggleGroupItem
               value="bold"
               aria-label="Toggle bold"
@@ -155,7 +149,6 @@ const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => 
               Ayol
             </ToggleGroupItem>
           </ToggleGroup>
-        </div>
       </div>
       {/* Category Combobox */}
       <div>
@@ -186,6 +179,10 @@ const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => 
                     key={category.id}
                     value={category.title}
                     onSelect={(currentValue) => {
+                      putParams("jobCategoryId", 
+                        currentValue === valuec ? "" : allCategory.find((c) => c.title.toLocaleLowerCase() === currentValue)
+                        ?.id || ""
+                      )
                       setValuec(
                         currentValue === valuec ? "" : currentValue
                       );
@@ -239,6 +236,10 @@ const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => 
                     key={region.id}
                     value={region.name}
                     onSelect={(currentValue) => {
+                      putParams("regionId", 
+                        currentValue === valuer ? "" : regions.find((r) => r.name.toLocaleLowerCase() === currentValue)
+                        ?.id || ""
+                      )
                       setValuer(
                         currentValue === valuer ? "" : currentValue
                       );
@@ -290,6 +291,10 @@ const Filter = ({setWorkers, setJobs, setPageNumber, pageSize}: FilterProps) => 
                     key={d.id}
                     value={d.name}
                     onSelect={(currentValue) => {
+                      putParams("districtId", 
+                        currentValue === valued ? "" : district.find((d) => d.name.toLocaleLowerCase() === currentValue)
+                        ?.id || ""
+                      )
                       setValued(
                         currentValue === valued ? "" : currentValue
                       );
