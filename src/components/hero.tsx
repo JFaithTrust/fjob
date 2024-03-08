@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 
 const Hero = () => {
   return (
-    <section className="mt-8 flex py-3 max-w-8xl mx-auto">
+    <section className="mt-8 flex py-3 container">
       <div className="flex flex-row w-full justify-between items-center">
         <div className="flex flex-col gap-y-12 basis-1/2">
           <h2 className="text-6xl font-bold font-roboto">
