@@ -21,7 +21,7 @@ interface FilterProps {
   pageSize: number
 }
 
-const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
+const Filter = ({ setWorkers, setJobs, pageNumber, pageSize }: FilterProps) => {
   const [openc, setOpenc] = useState(false);
   const [valuec, setValuec] = useState("");
   const [openr, setOpenr] = useState(false);
@@ -50,26 +50,29 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
   }, [valuer]);
 
   useEffect(() => {
-    if (setJobs){
-      getAllJobsFiltered(params)
-        .then((jobs) => {
-          setJobs(jobs)
-        })
-    }
-    if (setWorkers){
-      getAllWorkersFiltered(params)
-        .then((workers) => {
-          setWorkers(workers)
-        })
-    }
-  }, [params]);
+      if (params.has("pageNumber") && params.has("pageSize")) {
+        if (setJobs) {
+          getAllJobsFiltered(params)
+            .then((jobs) => {
+              setJobs(jobs)
+            })
+        }
+        if (setWorkers) {
+          getAllWorkersFiltered(params)
+            .then((workers) => {
+              setWorkers(workers)
+            })
+        }
+      }
+    }, [params]
+  );
 
   useEffect(() => {
     putParams("pageNumber", pageNumber.toString())
   }, [pageNumber]);
 
   function putParams(key: string, value: string) {
-    if (!params.has("pageSize")){
+    if (!params.has("pageSize")) {
       params.set("pageSize", pageSize.toString())
     }
     const newMap: Map<string, string> = new Map(params);
@@ -82,11 +85,11 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
     }
     setParams(newMap)
   }
-  
+
   const handleSubmitGender = (gender: string) => {
     if (gender === currentGender) {
       putParams("gender", "")
-    }else {
+    } else {
       putParams("gender", gender)
     }
     setCurrentGender(gender)
@@ -137,26 +140,26 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
         <Label className="text-base font-normal text-darkindigo">
           Jins
         </Label>
-          <ToggleGroup type="single" className="grid grid-cols-2 gap-x-2">
-            <ToggleGroupItem
-              value="bold"
-              aria-label="Toggle bold"
-              className="col-span-1 px-3 py-1 rounded-xl"
-              variant={"outline"}
-              onClick={() => handleSubmitGender("Erkak")}
-            >
-              Erkak
-            </ToggleGroupItem>
-            <ToggleGroupItem
-              value="italic"
-              aria-label="Toggle italic"
-              className="col-span-1 px-3 py-1 rounded-xl"
-              variant={"outline"}
-              onClick={() => handleSubmitGender("Ayol")}
-            >
-              Ayol
-            </ToggleGroupItem>
-          </ToggleGroup>
+        <ToggleGroup type="single" className="grid grid-cols-2 gap-x-2">
+          <ToggleGroupItem
+            value="bold"
+            aria-label="Toggle bold"
+            className="col-span-1 px-3 py-1 rounded-xl"
+            variant={"outline"}
+            onClick={() => handleSubmitGender("Erkak")}
+          >
+            Erkak
+          </ToggleGroupItem>
+          <ToggleGroupItem
+            value="italic"
+            aria-label="Toggle italic"
+            className="col-span-1 px-3 py-1 rounded-xl"
+            variant={"outline"}
+            onClick={() => handleSubmitGender("Ayol")}
+          >
+            Ayol
+          </ToggleGroupItem>
+        </ToggleGroup>
       </div>
       {/* Category Combobox */}
       <div>
@@ -187,9 +190,9 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
                     key={category.id}
                     value={category.title}
                     onSelect={(currentValue) => {
-                      putParams("jobCategoryId", 
+                      putParams("jobCategoryId",
                         currentValue === valuec ? "" : allCategory.find((c) => c.title.toLocaleLowerCase() === currentValue)
-                        ?.id || ""
+                          ?.id || ""
                       )
                       setValuec(
                         currentValue === valuec ? "" : currentValue
@@ -244,9 +247,9 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
                     key={region.id}
                     value={region.name}
                     onSelect={(currentValue) => {
-                      putParams("regionId", 
+                      putParams("regionId",
                         currentValue === valuer ? "" : regions.find((r) => r.name.toLocaleLowerCase() === currentValue)
-                        ?.id || ""
+                          ?.id || ""
                       )
                       setValuer(
                         currentValue === valuer ? "" : currentValue
@@ -299,9 +302,9 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize}: FilterProps) => {
                     key={d.id}
                     value={d.name}
                     onSelect={(currentValue) => {
-                      putParams("districtId", 
+                      putParams("districtId",
                         currentValue === valued ? "" : district.find((d) => d.name.toLocaleLowerCase() === currentValue)
-                        ?.id || ""
+                          ?.id || ""
                       )
                       setValued(
                         currentValue === valued ? "" : currentValue
