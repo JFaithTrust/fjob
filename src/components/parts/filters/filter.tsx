@@ -6,14 +6,14 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command.tsx";
 import { cn } from "@/lib/utils.ts";
 import { SetStateAction, useEffect, useState } from "react";
-import { Category, District, Region, Workers } from "@/types";
+import { Category, District, Region, Worker } from "@/types";
 import { getAllWorkersFiltered } from "@/api/fetchWorkers.ts";
 import { getAllCategory } from "@/api/fetchCategory.ts";
 import { getAllRegion } from "@/api/fetchRegion.ts";
 import { getDistrictByRegionId } from "@/api/fetchDistrict.ts";
 
 interface FilterProps {
-  setFilteredObjects: (objects: SetStateAction<Workers[]>) => void,
+  setFilteredObjects: (objects: SetStateAction<Worker[]>) => void,
   pageNumber: number,
   setPageNumber: (pageNumber: SetStateAction<number>) => void,
   pageSize: number

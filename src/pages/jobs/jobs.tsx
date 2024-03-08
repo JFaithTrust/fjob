@@ -20,12 +20,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { Category, District, Jobs, Region } from "@/types";
+import { Category, District, Job, Region } from "@/types";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Jobs = () => {
-  const [jobs, setJobs] = useState<Jobs[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   // part states of jobs

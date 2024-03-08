@@ -2,12 +2,12 @@ import { getCountOfAllWorkers } from "@/api/fetchWorkers";
 import { Partners, WorkerCard } from "@/components/parts";
 import CustomPagination from "@/components/ui/custom-pagination";
 import { Input } from "@/components/ui/input";
-import { Workers } from "@/types";
+import { Worker } from "@/types";
 import { useEffect, useState } from "react";
 import Filter from "@/components/parts/filters/filter.tsx";
 
 const Workers = () => {
-  const [workers, setWorkers] = useState<Workers[]>([]);
+  const [workers, setWorkers] = useState<Worker[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0)
