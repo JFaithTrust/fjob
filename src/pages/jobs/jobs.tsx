@@ -1,11 +1,10 @@
 // import { getDistrictByRegionId } from "@/api/fetchDistrict";
-import { getCountOfAllJobs } from "@/api/fetchJobs";
 // import { getAllRegion } from "@/api/fetchRegion";
 import { JobCard, Partners } from "@/components/parts";
 import CustomPagination from "@/components/ui/custom-pagination";
 import { Input } from "@/components/ui/input";
 import { Job } from "@/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Filter from "@/components/parts/filters/filter.tsx";
 // import { toast } from "sonner";
 
@@ -14,11 +13,7 @@ const Jobs = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0);
-  const usersPerPage = 9;
-
-  useEffect(() => {
-    getCountOfAllJobs().then((count) => setCount(count));
-  }, []);
+  const usersPerPage = 1;
 
   return (
     <div className="flex flex-col gap-y-8">
@@ -38,7 +33,9 @@ const Jobs = () => {
             <Filter
               setJobs={setJobs}
               pageNumber={currentPage}
-              pageSize={usersPerPage} />
+              pageSize={usersPerPage}
+              setCurrentPage={setCurrentPage}
+              setCount={setCount} />
             <div className="flex flex-col col-span-5">
               <div className="grid grid-cols-3 gap-3 w-full">
                 {jobs

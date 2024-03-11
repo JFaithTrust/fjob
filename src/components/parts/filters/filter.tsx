@@ -7,21 +7,24 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 import { cn } from "@/lib/utils.ts";
 import { SetStateAction, useEffect, useState } from "react";
 import { Category, District, Job, Region, Worker } from "@/types";
-import { getAllWorkersFiltered } from "@/api/fetchWorkers.ts";
+import { getAllWorkersFiltered, getCountFilteredWorkers } from "@/api/fetchWorkers.ts";
 import { getAllCategory } from "@/api/fetchCategory.ts";
 import { getAllRegion } from "@/api/fetchRegion.ts";
 import { getDistrictByRegionId } from "@/api/fetchDistrict.ts";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group.tsx";
-import { getAllJobsFiltered } from "@/api/fetchJobs.ts";
+import { getAllJobsFiltered, getCountFilteredJobs } from "@/api/fetchJobs.ts";
+
 
 interface FilterProps {
   setWorkers?: (workers: SetStateAction<Worker[]>) => void,
   setJobs?: (jobs: SetStateAction<Job[]>) => void,
-  pageNumber: number
-  pageSize: number
+  pageNumber: number,
+  pageSize: number,
+  setCount: (value: (((prevState: number) => number) | number)) => void,
+  setCurrentPage: (value: (((prevState: number) => number) | number)) => void
 }
 
-const Filter = ({ setWorkers, setJobs, pageNumber, pageSize }: FilterProps) => {
+const Filter = ({ setWorkers, setJobs, pageNumber, pageSize, setCount, setCurrentPage }: FilterProps) => {
   const [openc, setOpenc] = useState(false);
   const [valuec, setValuec] = useState("");
   const [openr, setOpenr] = useState(false);
@@ -56,11 +59,19 @@ const Filter = ({ setWorkers, setJobs, pageNumber, pageSize }: FilterProps) => {
             .then((jobs) => {
               setJobs(jobs)
             })
+          getCountFilteredJobs(params)
+            .then(count => {
+              setCount(count)
+            })
         }
         if (setWorkers) {
           getAllWorkersFiltered(params)
             .then((workers) => {
               setWorkers(workers)
+            })
+          getCountFilteredWorkers(params)
+            .then(count => {
+              setCount(count)
             })
         }
       }
@@ -74,6 +85,10 @@ const Filter = ({ setWorkers, setJobs, pageNumber, pageSize }: FilterProps) => {
   function putParams(key: string, value: string) {
     if (!params.has("pageSize")) {
       params.set("pageSize", pageSize.toString())
+    }
+    if (key !== "pageNumber"){
+      params.set("pageNumber", "1")
+      setCurrentPage(1)
     }
     const newMap: Map<string, string> = new Map(params);
     if (value.length > 0) {
