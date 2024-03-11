@@ -46,7 +46,7 @@ const WorkerDetail = () => {
         setRegion(region);
         const categoryWorker = await getWorkersByCategoryId(worker.categoryId);
         setCategoryWorkers(categoryWorker);
-        const experiences = await getExperienceByWorkerId(worker.id);
+        const experiences = await getExperienceByWorkerId(worker.createdBy);
         setExperiences(experiences);
         // const API_KEY = "AIzaSyAcfsk4C5rdqDe-TAtNFEQjcC6Vsak-zu4";
         // const url =
@@ -64,7 +64,7 @@ const WorkerDetail = () => {
   }, [worker]);
 
   return (
-    <div className="flex flex-col gap-y-8 mt-8">
+    <div className="flex flex-col gap-y-8">
       <div className="py-8 bg-lightblue">
         <div className="grid grid-cols-3 justify-center gap-x-4 container">
           <div className="flex flex-col gap-y-6 bg-white p-12 col-span-2 justify-start rounded-xl">

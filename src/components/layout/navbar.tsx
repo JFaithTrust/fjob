@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="container">
+    <div className="container py-4">
       <div className="h-10 py-4 flex flex-row justify-between w-full items-center">
         <div className="flex flex-row items-center justify-center gap-x-16 font-mulish font-bold text-lg">
           <Link to="/">Home</Link>

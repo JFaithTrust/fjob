@@ -22,7 +22,7 @@ const Workers = () => {
   // }, [valuec]);
 
   return (
-    <div className="flex flex-col gap-y-8 mt-8">
+    <div className="flex flex-col gap-y-8">
       <div className="py-8 bg-lightblue">
         <div className="flex flex-col gap-y-8 container">
           <h1 className="text-5xl font-semibold text-darkindigo">Workers</h1>
