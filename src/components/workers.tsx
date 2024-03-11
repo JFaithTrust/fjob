@@ -1,11 +1,11 @@
-import { Workers } from "@/types";
+import { Worker } from "@/types";
 import { WorkerCard } from "./parts";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 import { getWorkersByPagination } from "@/api/fetchWorkers";
 
 const Workers = () => {
-  const [workers, setWorkers] = useState<Workers[]>([]);
+  const [workers, setWorkers] = useState<Worker[]>([]);
 
   useEffect(() => {
     getWorkersByPagination(1, 4).then((data) => setWorkers(data));
@@ -13,7 +13,7 @@ const Workers = () => {
 
   return (
     <div className="bg-lightblue">
-      <div className="max-w-8xl mx-auto py-8 flex flex-col gap-y-8">
+      <div className="container py-8 flex flex-col gap-y-8">
         <h1 className="text-center font-roboto text-5xl font-semibold">
           <span className="text-darkblue">Top</span> Workers
         </h1>

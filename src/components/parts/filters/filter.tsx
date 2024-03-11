@@ -6,19 +6,22 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command.tsx";
 import { cn } from "@/lib/utils.ts";
 import { SetStateAction, useEffect, useState } from "react";
-import { Category, District, Region, Workers } from "@/types";
-import { getAllWorkersFiltered, getWorkersByPagination } from "@/api/fetchWorkers.ts";
+import { Category, District, Job, Region, Worker } from "@/types";
+import { getAllWorkersFiltered } from "@/api/fetchWorkers.ts";
 import { getAllCategory } from "@/api/fetchCategory.ts";
 import { getAllRegion } from "@/api/fetchRegion.ts";
 import { getDistrictByRegionId } from "@/api/fetchDistrict.ts";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group.tsx";
+import { getAllJobsFiltered } from "@/api/fetchJobs.ts";
 
 interface FilterProps {
-  setFilteredObjects: (objects: SetStateAction<Workers[]>) => void,
-  pageNumber: number,
+  setWorkers?: (workers: SetStateAction<Worker[]>) => void,
+  setJobs?: (jobs: SetStateAction<Job[]>) => void,
+  pageNumber: number
   pageSize: number
 }
 
-const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
+const Filter = ({ setWorkers, setJobs, pageNumber, pageSize }: FilterProps) => {
   const [openc, setOpenc] = useState(false);
   const [valuec, setValuec] = useState("");
   const [openr, setOpenr] = useState(false);
@@ -30,17 +33,12 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
   // const [count, setCount] = useState(0)
   const [regions, setRegions] = useState<Region[]>([]);
   const [params, setParams] = useState(new Map<string, string>())
-
-
-
+  const [currentGender, setCurrentGender] = useState("")
 
   useEffect(() => {
-    getWorkersByPagination(pageNumber, pageSize).then((workers) =>
-      setFilteredObjects(workers)
-    );
     getAllCategory().then((categories) => setAllCategory(categories));
     getAllRegion().then((regions) => setRegions(regions));
-  }, [pageNumber]);
+  }, []);
 
   useEffect(() => {
     if (valuer) {
@@ -52,14 +50,31 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
   }, [valuer]);
 
   useEffect(() => {
-    console.log("use effect")
-    getAllWorkersFiltered(params)
-      .then((workers) => {
-        setFilteredObjects(workers)
-      })
-  }, [params]);
+      if (params.has("pageNumber") && params.has("pageSize")) {
+        if (setJobs) {
+          getAllJobsFiltered(params)
+            .then((jobs) => {
+              setJobs(jobs)
+            })
+        }
+        if (setWorkers) {
+          getAllWorkersFiltered(params)
+            .then((workers) => {
+              setWorkers(workers)
+            })
+        }
+      }
+    }, [params]
+  );
+
+  useEffect(() => {
+    putParams("pageNumber", pageNumber.toString())
+  }, [pageNumber]);
 
   function putParams(key: string, value: string) {
+    if (!params.has("pageSize")) {
+      params.set("pageSize", pageSize.toString())
+    }
     const newMap: Map<string, string> = new Map(params);
     if (value.length > 0) {
       newMap.set(key, value);
@@ -71,8 +86,17 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
     setParams(newMap)
   }
 
+  const handleSubmitGender = (gender: string) => {
+    if (gender === currentGender) {
+      putParams("gender", "")
+    } else {
+      putParams("gender", gender)
+    }
+    setCurrentGender(gender)
+  };
+
   return (
-    <div className="col-span-1 flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-4">
       {/* Salary */}
       <div>
         <Label className="text-base font-normal text-darkindigo">
@@ -88,11 +112,6 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
                    onChange={
                      event => putParams("maxSalary", event.target.value)
                    } />
-          </div>
-          <div className="h-full col-span-1 flex items-end">
-            <Button className="h-fit items-end px-3 py-1 rounded-2xl">
-              Go
-            </Button>
           </div>
         </div>
       </div>
@@ -114,11 +133,6 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
                      event => putParams("maxAge", event.target.value)
                    } />
           </div>
-          <div className="h-full col-span-1 flex items-end">
-            <Button className="h-fit items-end px-3 py-1 rounded-2xl">
-              Go
-            </Button>
-          </div>
         </div>
       </div>
       {/* Gender */}
@@ -126,24 +140,26 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
         <Label className="text-base font-normal text-darkindigo">
           Jins
         </Label>
-        <div className="grid grid-cols-2 gap-x-2">
-          <div className="col-span-1">
-            <Button
-              variant={"active-outline"}
-              className="items-end px-3 py-1 rounded-xl"
-            >
-              Erkak
-            </Button>
-          </div>
-          <div className="col-span-1">
-            <Button
-              variant={"active-outline"}
-              className="items-end px-3 py-1 rounded-xl"
-            >
-              Ayol
-            </Button>
-          </div>
-        </div>
+        <ToggleGroup type="single" className="grid grid-cols-2 gap-x-2">
+          <ToggleGroupItem
+            value="bold"
+            aria-label="Toggle bold"
+            className="col-span-1 px-3 py-1 rounded-xl"
+            variant={"outline"}
+            onClick={() => handleSubmitGender("Erkak")}
+          >
+            Erkak
+          </ToggleGroupItem>
+          <ToggleGroupItem
+            value="italic"
+            aria-label="Toggle italic"
+            className="col-span-1 px-3 py-1 rounded-xl"
+            variant={"outline"}
+            onClick={() => handleSubmitGender("Ayol")}
+          >
+            Ayol
+          </ToggleGroupItem>
+        </ToggleGroup>
       </div>
       {/* Category Combobox */}
       <div>
@@ -174,6 +190,10 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
                     key={category.id}
                     value={category.title}
                     onSelect={(currentValue) => {
+                      putParams("jobCategoryId",
+                        currentValue === valuec ? "" : allCategory.find((c) => c.title.toLocaleLowerCase() === currentValue)
+                          ?.id || ""
+                      )
                       setValuec(
                         currentValue === valuec ? "" : currentValue
                       );
@@ -227,6 +247,10 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
                     key={region.id}
                     value={region.name}
                     onSelect={(currentValue) => {
+                      putParams("regionId",
+                        currentValue === valuer ? "" : regions.find((r) => r.name.toLocaleLowerCase() === currentValue)
+                          ?.id || ""
+                      )
                       setValuer(
                         currentValue === valuer ? "" : currentValue
                       );
@@ -278,6 +302,10 @@ const Filter = ({setFilteredObjects, pageNumber, pageSize}: FilterProps) => {
                     key={d.id}
                     value={d.name}
                     onSelect={(currentValue) => {
+                      putParams("districtId",
+                        currentValue === valued ? "" : district.find((d) => d.name.toLocaleLowerCase() === currentValue)
+                          ?.id || ""
+                      )
                       setValued(
                         currentValue === valued ? "" : currentValue
                       );

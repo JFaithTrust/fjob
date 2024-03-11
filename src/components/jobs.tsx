@@ -1,4 +1,4 @@
-import { Jobs } from "@/types";
+import { Job } from "@/types";
 import { JobCard } from "./parts";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
@@ -6,7 +6,7 @@ import { getJobsByPagination } from "@/api/fetchJobs";
 import { useNavigate } from "react-router-dom";
 
 const Jobs = () => {
-  const [jobs, setJobs] = useState<Jobs[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Jobs = () => {
   }, []);
   return (
     <div className="bg-lightblue">
-      <div className="max-w-8xl mx-auto py-8 flex flex-col gap-y-8">
+      <div className="container py-8 flex flex-col gap-y-8">
         <h1 className="text-center font-roboto text-5xl font-semibold">
           <span className="text-darkblue">Top</span> Jobs
         </h1>

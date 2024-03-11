@@ -13,6 +13,7 @@ module.exports = {
       center: true,
       screens: {
         "2xl": "1560px",
+        "xl ": "1280px"
       },
     },
     maxWidth: {
