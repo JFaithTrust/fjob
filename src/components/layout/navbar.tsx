@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-
 const Navbar = () => {
   return (
     <div className="container py-4">
-      <div className="h-10 py-4 flex flex-row justify-between w-full items-center">
+      <div className="h-10 py-4 md:flex flex-row justify-between w-full items-center hidden">
         <div className="flex flex-row items-center justify-center gap-x-16 font-mulish font-bold text-lg">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>

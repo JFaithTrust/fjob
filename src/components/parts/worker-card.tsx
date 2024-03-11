@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { Category, District, Region, Workers } from "@/types";
+import { Category, District, Region, Worker } from "@/types";
 import { useEffect, useState } from "react";
 import { getCategoryById } from "@/api/fetchCategory";
 import { getDistrictById } from "@/api/fetchDistrict";
@@ -9,11 +9,11 @@ import { getRegionByDistrictId } from "@/api/fetchRegion";
 import { useNavigate } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 
-interface Worker {
-  worker: Workers;
+interface Workers {
+  worker: Worker;
 }
 
-const WorkerCard = ({ worker }: Worker) => {
+const WorkerCard = ({ worker }: Workers) => {
   const [category, setCategory] = useState<Category>();
   const [district, setDistrict] = useState<District>();
   const [region, setRegion] = useState<Region>();
@@ -37,8 +37,8 @@ const WorkerCard = ({ worker }: Worker) => {
       <div className="p-6 flex flex-col gap-y-4">
         <div className="flex flex-row font-roboto gap-x-2 items-center">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src="/src/assets/worker.svg" alt={worker.title} />
+            <AvatarFallback>{worker.title.charAt(0)}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
             <span className="text-2xl font-bold leading-none text-darkindigo">
