@@ -30,6 +30,7 @@ const Workers = () => {
               setWorkers={setWorkers}
               pageNumber={currentPage}
               pageSize={usersPerPage}
+              setCurrentPage={setCurrentPage}
               setCount={setCount}/>
             <div className={`flex flex-col col-span-5`}>
               <div className="grid grid-cols-4 gap-3 w-full">

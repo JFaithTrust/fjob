@@ -20,10 +20,11 @@ interface FilterProps {
   setJobs?: (jobs: SetStateAction<Job[]>) => void,
   pageNumber: number,
   pageSize: number,
-  setCount: (value: (((prevState: number) => number) | number)) => void
+  setCount: (value: (((prevState: number) => number) | number)) => void,
+  setCurrentPage: (value: (((prevState: number) => number) | number)) => void
 }
 
-const Filter = ({ setWorkers, setJobs, pageNumber, pageSize, setCount }: FilterProps) => {
+const Filter = ({ setWorkers, setJobs, pageNumber, pageSize, setCount, setCurrentPage }: FilterProps) => {
   const [openc, setOpenc] = useState(false);
   const [valuec, setValuec] = useState("");
   const [openr, setOpenr] = useState(false);
@@ -84,6 +85,10 @@ const Filter = ({ setWorkers, setJobs, pageNumber, pageSize, setCount }: FilterP
   function putParams(key: string, value: string) {
     if (!params.has("pageSize")) {
       params.set("pageSize", pageSize.toString())
+    }
+    if (key !== "pageNumber"){
+      params.set("pageNumber", "1")
+      setCurrentPage(1)
     }
     const newMap: Map<string, string> = new Map(params);
     if (value.length > 0) {
