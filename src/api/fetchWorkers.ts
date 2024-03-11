@@ -25,8 +25,8 @@ export const getExperienceByWorkerId = async (id: string) => {
   return data;
 }
 
-export const getCountOfAllWorkers = async (): Promise<number> => {
-  const { data } = await axios.get("/api/Worker/GetCount");
+export const getCountFilteredWorkers = async (params: Map<string, string>): Promise<number> => {
+  const { data } = await axios.get(`/api/Worker/GetCountForFilter?${getQuery(params)}`);
   return data;
 }
 export const getAllWorkersFiltered = async (params: Map<string, string>) => {

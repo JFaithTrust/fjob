@@ -23,8 +23,8 @@ export const getJobsByPagination = async (
 };
 
 // get count of all jobs
-export const getCountOfAllJobs = async (): Promise<number> => {
-  const { data } = await axios.get("/api/Job/GetCount");
+export const getCountFilteredJobs = async (params: Map<string, string>): Promise<number> => {
+  const { data } = await axios.get(`/api/Job/GetCountForFilter?${getQuery(params)}`);
   return data;
 };
 

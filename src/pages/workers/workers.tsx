@@ -1,9 +1,8 @@
-import { getCountOfAllWorkers } from "@/api/fetchWorkers";
 import { Partners, WorkerCard } from "@/components/parts";
 import CustomPagination from "@/components/ui/custom-pagination";
 import { Input } from "@/components/ui/input";
 import { Worker } from "@/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Filter from "@/components/parts/filters/filter.tsx";
 
 const Workers = () => {
@@ -12,10 +11,6 @@ const Workers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0)
   const usersPerPage = 9;
-
-  useEffect(() => {
-    getCountOfAllWorkers().then(count => setCount(count));
-  }, []);
 
   return (
     <div className="flex flex-col gap-y-8 mt-8">
@@ -34,7 +29,8 @@ const Workers = () => {
             <Filter
               setWorkers={setWorkers}
               pageNumber={currentPage}
-              pageSize={usersPerPage} />
+              pageSize={usersPerPage}
+              setCount={setCount}/>
             <div className={`flex flex-col col-span-5`}>
               <div className="grid grid-cols-4 gap-3 w-full">
                 {workers
