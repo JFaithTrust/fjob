@@ -8,6 +8,7 @@ import { getDistrictById } from "@/api/fetchDistrict";
 import { getRegionByDistrictId } from "@/api/fetchRegion";
 import { useNavigate } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
+import {SkeletonCard} from "@/components/ui/custom-skeleton.tsx";
 
 interface Workers {
   worker: Worker;
@@ -17,6 +18,7 @@ const WorkerCard = ({ worker }: Workers) => {
   const [category, setCategory] = useState<Category>();
   const [district, setDistrict] = useState<District>();
   const [region, setRegion] = useState<Region>();
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate()
 
@@ -28,13 +30,14 @@ const WorkerCard = ({ worker }: Workers) => {
       setDistrict(district);
       const region = await getRegionByDistrictId(district.id);
       setRegion(region);
+      setLoading(false)
     };
     getPartOfJobs();
   }, [worker]);
 
   return (
     <div className="flex flex-col bg-white rounded-lg shadow-[0_1px_8px_-2px_#2F07E5]">
-      <div className="p-6 flex flex-col gap-y-4">
+      {loading ? (<SkeletonCard />) : (<div className="flex flex-col gap-y-4 p-6">
         <div className="flex flex-row font-roboto gap-x-2 items-center">
           <Avatar>
             <AvatarImage src="/src/assets/worker.svg" alt={worker.title} />
@@ -48,12 +51,12 @@ const WorkerCard = ({ worker }: Workers) => {
         </div>
         <div>
           {district && region && (
-            <div className={`flex`}>
-              <IoLocationOutline />
-              <span className="text-base leading-none font-normal text-gray-600">
+              <div className={`flex`}>
+                <IoLocationOutline />
+                <span className="text-base leading-none font-normal text-gray-600">
                 {district.name}, {region.name}
               </span>
-            </div>
+              </div>
           )}
         </div>
         <div className="flex items-center font-bold">
@@ -70,7 +73,7 @@ const WorkerCard = ({ worker }: Workers) => {
             Ko'rish
           </Button>
         </div>
-      </div>
+      </div>)}
     </div>
   );
 };

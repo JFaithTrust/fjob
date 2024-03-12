@@ -16,7 +16,7 @@ const Jobs = () => {
     return (
         <div className="bg-lightblue">
             <div className="container py-8 flex flex-col gap-y-8">
-                <h1 className="text-center font-roboto text-5xl font-semibold">
+                <h1 className="text-center font-roboto sm:text-5xl text-4xl font-semibold">
                     <span className="text-darkblue">Top</span> Jobs
                 </h1>
                 <Carousel
@@ -43,7 +43,7 @@ const Jobs = () => {
                 <div className="flex items-center justify-center">
                     <Button
                         variant={"outline"}
-                        className="px-5 py-3 font-roboto text-lg rounded-xl"
+                        className="sm:px-5 px-2 sm:py-3 py-1 font-roboto sm:text-lg text-base rounded-xl"
                         onClick={() => navigate("/jobs")}
                     >
                         See More...
