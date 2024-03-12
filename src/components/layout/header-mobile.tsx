@@ -22,6 +22,7 @@ const HeaderMobile = () => {
                 className="absolute inset-0 right-0 w-full bg-white"
                 variants={sidebar}
             />
+            <motion.div className="pointer-events-auto absolute w-full top-0 z-30 h-14 bg-white" />
             <motion.div className="pointer-events-auto absolute left-4 top-[14px] z-30 font-mulish font-bold text-2xl">
                 <Link to="/">Logo.</Link>
             </motion.div>

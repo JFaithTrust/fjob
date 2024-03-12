@@ -3,7 +3,7 @@ import { getDistrictById } from "@/api/fetchDistrict";
 import { getJobByCategoryId, getJobById } from "@/api/fetchJobs";
 import { getRegionByDistrictId } from "@/api/fetchRegion";
 import { JobCard, Partners } from "@/components/parts";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Category, District, Job, Region } from "@/types";
 import { useState, useEffect } from "react";
@@ -17,6 +17,7 @@ const JobDetail = () => {
   const [district, setDistrict] = useState<District>();
   const [region, setRegion] = useState<Region>();
   const [categoryJobs, setCategoryJobs] = useState<Job[]>();
+  // const [loading, setLoading] = useState(true)
   // const [iframeUrl, setIframeUrl] = useState("");
 
   const { jobId } = useParams();
@@ -51,6 +52,7 @@ const JobDetail = () => {
         //   "&language=uz" +
         //   "&zoom=13";
         // setIframeUrl(url);
+        // setLoading(false)
       }
     };
     getPartOfJobs();
@@ -59,10 +61,11 @@ const JobDetail = () => {
   return (
     <div className="flex flex-col gap-y-8">
       <div className="py-8 bg-lightblue">
-        <div className="grid grid-cols-3 justify-center gap-x-4 container">
-          <div className="flex flex-col gap-y-6 bg-white p-12 col-span-2 justify-start rounded-xl">
+        <div className="grid lg:grid-cols-3 grid-cols-1 justify-center gap-x-4 container">
+          <div className="flex flex-col gap-y-6 bg-white p-12 lg:col-span-2 col-span-1 justify-start rounded-xl">
             <div className="flex flex-row gap-x-6 items-center">
               <Avatar>
+                <AvatarImage src={'/src/assets/job.svg'} alt={job?.title} />
                 <AvatarFallback>
                   {job?.title?.charAt(0)}
                 </AvatarFallback>
@@ -109,15 +112,15 @@ const JobDetail = () => {
               <div className="flex flex-row justify-between">
                 <div className="flex flex-col gap-y-1">
                   <span className="font-normal text-base text-gray-400">
-                    Manzil
+                    Ish vaqti
                   </span>
                   <span className="text-darkindigo font-semibold text-lg">
-                    {job?.workingTime} dan {job?.workingTime} gacha
+                    {job?.workingTime}
                   </span>
                 </div>
                 <div className="flex flex-col gap-y-1">
                   <span className="font-normal text-base text-gray-400">
-                    Manzil
+                    Ish grafigi
                   </span>
                   <span className="text-darkindigo font-semibold text-lg">
                     {job?.workingSchedule}
@@ -172,7 +175,7 @@ const JobDetail = () => {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g clip-path="url(#clip0_1533_19346)">
+                      <g clipPath="url(#clip0_1533_19346)">
                         <path
                           d="M24.5 12C24.5 14.3734 23.7962 16.6935 22.4776 18.6668C21.1591 20.6402 19.2849 22.1783 17.0922 23.0866C14.8995 23.9948 12.4867 24.2324 10.1589 23.7694C7.83115 23.3064 5.69295 22.1635 4.01472 20.4853C2.33649 18.8071 1.1936 16.6689 0.730582 14.3411C0.267559 12.0133 0.505199 9.60051 1.41345 7.4078C2.3217 5.21509 3.85977 3.34094 5.83316 2.02237C7.80655 0.703788 10.1266 4.74592e-07 12.5 4.74592e-07C14.076 -0.000442805 15.6366 0.309644 17.0927 0.912543C18.5488 1.51544 19.8719 2.39934 20.9863 3.51373C22.1007 4.62812 22.9846 5.95117 23.5875 7.40728C24.1904 8.86338 24.5004 10.424 24.5 12Z"
                           fill="url(#paint0_linear_1533_19346)"
@@ -199,8 +202,8 @@ const JobDetail = () => {
                           y2="51.144"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#37AEE2" />
-                          <stop offset="1" stop-color="#1E96C8" />
+                          <stop stopColor="#37AEE2" />
+                          <stop offset="1" stopColor="#1E96C8" />
                         </linearGradient>
                         <linearGradient
                           id="paint1_linear_1533_19346"
@@ -210,8 +213,8 @@ const JobDetail = () => {
                           y2="7.55645"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#EFF7FC" />
-                          <stop offset="1" stop-color="white" />
+                          <stop stopColor="#EFF7FC" />
+                          <stop offset="1" stopColor="white" />
                         </linearGradient>
                         <clipPath id="clip0_1533_19346">
                           <rect
@@ -236,7 +239,7 @@ const JobDetail = () => {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g clip-path="url(#clip0_1533_19353)">
+                      <g clipPath="url(#clip0_1533_19353)">
                         <path
                           d="M6.58588 23.9151C5.65758 23.9047 4.73801 23.7344 3.86753 23.4118C3.23187 23.1768 2.65676 22.8027 2.18424 22.3169C1.69712 21.8454 1.32251 21.2701 1.08824 20.6339C0.765824 19.7634 0.595808 18.8439 0.585647 17.9158C0.514353 16.3727 0.5 15.9099 0.5 12C0.5 8.09012 0.515765 7.62894 0.584941 6.08471C0.596335 5.15689 0.76656 4.23788 1.08824 3.36753C1.32365 2.73176 1.69773 2.15642 2.18329 1.68329C2.65523 1.19662 3.23061 0.822358 3.86682 0.588235C4.7373 0.265557 5.65687 0.0953008 6.58518 0.0849412C8.12871 0.0143529 8.59224 0 12.5 0C16.4078 0 16.8711 0.0157647 18.4153 0.0849412C19.3433 0.0962542 20.2626 0.266481 21.1332 0.588235C21.7691 0.822667 22.3443 1.1968 22.8165 1.68306C23.3029 2.15535 23.6772 2.73073 23.9118 3.36682C24.2345 4.23729 24.4049 5.15686 24.4153 6.08518C24.4859 7.62941 24.5002 8.09176 24.5002 12.0005C24.5002 15.9092 24.4859 16.3715 24.4153 17.9158C24.4041 18.8439 24.2338 19.7633 23.9118 20.6339C23.6682 21.2652 23.2951 21.8386 22.8166 22.317C22.338 22.7954 21.7646 23.1683 21.1332 23.4118C20.2627 23.7345 19.3431 23.9049 18.4148 23.9153C16.872 23.9859 16.4082 24.0002 12.4995 24.0002C8.59082 24.0002 8.12847 23.9866 6.58565 23.9153"
                           fill="url(#paint0_radial_1533_19353)"
@@ -259,8 +262,8 @@ const JobDetail = () => {
                           gradientUnits="userSpaceOnUse"
                           gradientTransform="translate(2.05318 23.4744) scale(30.4711)"
                         >
-                          <stop offset="0.09" stop-color="#FA8F21" />
-                          <stop offset="0.78" stop-color="#D82D7E" />
+                          <stop offset="0.09" stopColor="#FA8F21" />
+                          <stop offset="0.78" stopColor="#D82D7E" />
                         </radialGradient>
                         <radialGradient
                           id="paint1_radial_1533_19353"
@@ -272,10 +275,10 @@ const JobDetail = () => {
                         >
                           <stop
                             offset="0.64"
-                            stop-color="#8C3AAA"
-                            stop-opacity="0"
+                            stopColor="#8C3AAA"
+                            stopOpacity="0"
                           />
-                          <stop offset="1" stop-color="#8C3AAA" />
+                          <stop offset="1" stopColor="#8C3AAA" />
                         </radialGradient>
                         <clipPath id="clip0_1533_19353">
                           <rect
@@ -320,7 +323,7 @@ const JobDetail = () => {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g clip-path="url(#clip0_1533_19346)">
+                      <g clipPath="url(#clip0_1533_19346)">
                         <path
                           d="M24.5 12C24.5 14.3734 23.7962 16.6935 22.4776 18.6668C21.1591 20.6402 19.2849 22.1783 17.0922 23.0866C14.8995 23.9948 12.4867 24.2324 10.1589 23.7694C7.83115 23.3064 5.69295 22.1635 4.01472 20.4853C2.33649 18.8071 1.1936 16.6689 0.730582 14.3411C0.267559 12.0133 0.505199 9.60051 1.41345 7.4078C2.3217 5.21509 3.85977 3.34094 5.83316 2.02237C7.80655 0.703788 10.1266 4.74592e-07 12.5 4.74592e-07C14.076 -0.000442805 15.6366 0.309644 17.0927 0.912543C18.5488 1.51544 19.8719 2.39934 20.9863 3.51373C22.1007 4.62812 22.9846 5.95117 23.5875 7.40728C24.1904 8.86338 24.5004 10.424 24.5 12Z"
                           fill="url(#paint0_linear_1533_19346)"
@@ -347,8 +350,8 @@ const JobDetail = () => {
                           y2="51.144"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#37AEE2" />
-                          <stop offset="1" stop-color="#1E96C8" />
+                          <stop stopColor="#37AEE2" />
+                          <stop offset="1" stopColor="#1E96C8" />
                         </linearGradient>
                         <linearGradient
                           id="paint1_linear_1533_19346"
@@ -358,8 +361,8 @@ const JobDetail = () => {
                           y2="7.55645"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#EFF7FC" />
-                          <stop offset="1" stop-color="white" />
+                          <stop stopColor="#EFF7FC" />
+                          <stop offset="1" stopColor="white" />
                         </linearGradient>
                         <clipPath id="clip0_1533_19346">
                           <rect
@@ -389,8 +392,8 @@ const JobDetail = () => {
                         fill="#0BCD74"
                       />
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M8.35275 9.89352L9.31964 9.53644C9.31964 9.53644 10.0649 11.0282 11.5363 12.5059C13.0077 13.9836 14.6365 14.7853 14.6365 14.7853L14.2192 15.7661C14.2192 15.7661 12.3848 14.6998 10.8684 13.1768C9.35181 11.6538 8.35275 9.89352 8.35275 9.89352ZM19.1654 14.5127C19.8203 14.8397 19.9627 15.7155 19.4455 16.2349L17.2289 18.461C17.0677 18.623 16.8706 18.7444 16.6538 18.8153C16.437 18.8862 16.2065 18.9046 15.9812 18.869C15.83 18.8449 15.6793 18.8176 15.5292 18.7871C14.1759 18.6025 11.5137 17.9104 8.95469 15.3404C6.25341 12.6276 5.48316 9.5885 5.26568 8.20429C5.23017 7.97807 5.24845 7.74663 5.31903 7.52887C5.38961 7.3111 5.51049 7.11319 5.67179 6.95132L7.88858 4.72511C8.4057 4.20573 9.27777 4.3488 9.6034 5.0065L11.3142 8.46188L10.4592 8.88593L8.8735 5.6605C8.78138 5.47316 8.53331 5.43209 8.38619 5.57983L6.57108 7.40265C6.47736 7.49678 6.40406 7.60936 6.35579 7.73333C6.30751 7.8573 6.28531 7.98995 6.29059 8.12296C6.32153 8.91157 6.55392 10.4271 7.68733 12.2543C8.15293 12.9518 8.75763 13.7041 9.54345 14.4933C12.2618 17.2233 14.7241 17.7515 15.907 17.8311C16.0682 17.8278 16.1949 17.8162 16.2834 17.8049C16.4004 17.79 16.5142 17.7534 16.614 17.6904C16.6738 17.6526 16.7293 17.6082 16.7794 17.558L18.5945 15.7351C18.7417 15.5874 18.7007 15.3382 18.5142 15.2457L15.3024 13.6532L15.7246 12.7944L19.1654 14.5127Z"
                         fill="white"
                       />
@@ -403,8 +406,7 @@ const JobDetail = () => {
           </div>
           <div className="flex flex-col gap-y-6 col-span-1 rounded-xl">
             {categoryJobs
-              ?.slice(0, 5)
-              .filter((item) => item.id !== job?.id)
+              ?.filter((item) => item.id !== job?.id)
               .map((item) => (
                 <JobCard job={item} key={item.id} />
               ))}

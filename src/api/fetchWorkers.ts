@@ -20,8 +20,8 @@ export const getWorkersByCategoryId = async (id: string): Promise<Worker[]> => {
 }
 
 // get experience by worker id
-export const getExperienceByWorkerId = async (id: string) => {
-  const { data } = await axios.get(`/api/Worker/GetExperiencesByUserId/${id}`);
+export const getExperienceByUserId = async (id: string) => {
+  const { data } = await axios.get(`/api/Experience/GetExperiencesByUserId/${id}`);
   return data;
 }
 

@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import {
-  getExperienceByWorkerId,
+  getExperienceByUserId,
   getWorkerById,
   getWorkersByCategoryId,
 } from "@/api/fetchWorkers";
@@ -46,7 +46,7 @@ const WorkerDetail = () => {
         setRegion(region);
         const categoryWorker = await getWorkersByCategoryId(worker.categoryId);
         setCategoryWorkers(categoryWorker);
-        const experiences = await getExperienceByWorkerId(worker.createdBy);
+        const experiences = await getExperienceByUserId(worker.createdBy);
         setExperiences(experiences);
         // const API_KEY = "AIzaSyAcfsk4C5rdqDe-TAtNFEQjcC6Vsak-zu4";
         // const url =
@@ -71,10 +71,10 @@ const WorkerDetail = () => {
             <div className="flex flex-row gap-x-6 items-center">
               <Avatar>
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
+                  src="/src/assets/worker.svg"
+                  alt={worker?.fullName}
                 />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>{worker?.fullName.charAt(0)}</AvatarFallback>
               </Avatar>
               <h1 className="text-darkindigo font-bold text-lg">
                 {worker?.fullName}

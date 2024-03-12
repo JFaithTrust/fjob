@@ -12,7 +12,7 @@ const Faq = () => {
         <h1 className="text-center font-roboto text-3xl font-semibold">
           <span className="text-darkblue">F.A.Q.</span> Session
         </h1>
-        <Accordion type="single" collapsible className="w-full px-56">
+        <Accordion type="single" collapsible className="w-full xl:px-56 lg:px-40 sm:px-20 px-0">
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
             <AccordionContent>
