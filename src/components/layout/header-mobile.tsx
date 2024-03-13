@@ -28,13 +28,13 @@ const HeaderMobile = () => {
             </motion.div>
             <motion.ul
                 variants={variants}
-                className="absolute grid w-full gap-3 px-10 py-16"
+                className="absolute grid grid-cols-1 justify-items-center w-full gap-6 py-16"
             >
                 <motion.li variants={MenuItemVariants}>
                     <Link
                         to={'/'}
                         onClick={() => toggleOpen()}
-                        className={`flex w-full text-2xl`}
+                        className={`flex w-full text-3xl`}
                     >
                         Home
                     </Link>
@@ -43,7 +43,7 @@ const HeaderMobile = () => {
                     <Link
                         to={'/about'}
                         onClick={() => toggleOpen()}
-                        className={`flex w-full text-2xl`}
+                        className={`flex w-full text-3xl`}
                     >
                         About
                     </Link>
@@ -52,7 +52,7 @@ const HeaderMobile = () => {
                     <Link
                         to={'/contact'}
                         onClick={() => toggleOpen()}
-                        className={`flex w-full text-2xl`}
+                        className={`flex w-full text-3xl`}
                     >
                         Contact
                     </Link>
@@ -61,7 +61,7 @@ const HeaderMobile = () => {
                     <Link
                         to={'/jobs'}
                         onClick={() => toggleOpen()}
-                        className={`flex w-full text-2xl`}
+                        className={`flex w-full text-3xl`}
                     >
                         Jobs
                     </Link>
@@ -70,7 +70,7 @@ const HeaderMobile = () => {
                     <Link
                         to={'/workers'}
                         onClick={() => toggleOpen()}
-                        className={`flex w-full text-2xl`}
+                        className={`flex w-full text-3xl`}
                     >
                         Workers
                     </Link>

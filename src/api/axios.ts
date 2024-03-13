@@ -4,7 +4,7 @@ import axios, { AxiosInstance } from "axios";
 // const BASE_URL = "http://172.16.15.25:28";
 
 // local url
-const BASE_URL = "https://8b5b-195-158-2-216.ngrok-free.app"
+const BASE_URL = "https://accepted-first-pug.ngrok-free.app"
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,

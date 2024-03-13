@@ -8,7 +8,7 @@ class BaseObject {
     deadline: Date;
     telegramLink: string;
     instagramLink: string;
-    tgUsername: string;
+    tgUserName: string;
     categoryId: string;
     districtId: string;
     createDate: Date;
