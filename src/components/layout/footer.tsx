@@ -5,17 +5,19 @@ import {
   FaInstagram,
   FaTelegram,
 } from "react-icons/fa";
+import {logo} from "@/assets";
 
 const Footer = () => {
   return (
     <footer className="bg-darkindigo py-8">
       <div className="container flex flex-col">
         <div className="flex sm:flex-row flex-col sm:gap-y-0 gap-y-4 justify-between items-center">
-          <span className="text-white text-6xl font-roboto font-bold">
+          <span className="flex items-center text-white text-6xl font-roboto font-bold gap-x-1.5">
+            <img src={logo} alt="" className={"w-14 h-14"}/>
             <span className="text-darkblue">UZ</span>WORKS
           </span>
           <div className="flex flex-row gap-x-4">
-            <div className="p-2 bg-white rounded-full">
+          <div className="p-2 bg-white rounded-full">
               <FaFacebook />
             </div>
             <div className="p-2 bg-white rounded-full">

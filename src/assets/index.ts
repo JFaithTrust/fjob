@@ -5,6 +5,8 @@ const samsung = new URL('./samsung.svg', import.meta.url).href
 const zoom = new URL('./zoom.svg', import.meta.url).href
 const jobIcon = new URL('./job.svg', import.meta.url).href
 const workerIcon = new URL('./worker.svg', import.meta.url).href
+const logo = new URL('./logo.svg', import.meta.url).href
+const darkLogo = new URL('./dark-logo.svg', import.meta.url).href
 
 
-export { heroImage, akfa, amazon, samsung, zoom, jobIcon, workerIcon }
+export { heroImage, akfa, amazon, samsung, zoom, jobIcon, workerIcon, darkLogo, logo }
