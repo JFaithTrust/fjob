@@ -1,4 +1,5 @@
 import { Button } from "./ui/button";
+import {heroImage} from "@/assets";
 
 const Hero = () => {
   return (
@@ -23,7 +24,7 @@ const Hero = () => {
         </div>
         <div className="basis-1/2 lg:block hidden">
           <img
-            src="../../src/assets/heroImage.svg"
+            src={heroImage}
             alt=""
             className="w-[546px] h-[546px] object-cover"
           />
