@@ -1,6 +1,4 @@
 import { Button } from "./ui/button";
-import {heroImage} from "@/assets";
-
 const Hero = () => {
   return (
     <section className="mt-8 flex py-3 container">
@@ -24,7 +22,7 @@ const Hero = () => {
         </div>
         <div className="basis-1/2 lg:block hidden">
           <img
-            src={heroImage}
+            src="@/assets/heroImage.svg"
             alt=""
             className="w-[546px] h-[546px] object-cover"
           />
