@@ -23,7 +23,7 @@ const Hero = () => {
         </div>
         <div className="basis-1/2 lg:block hidden">
           <img
-            src="/src/assets/heroImage.svg"
+            src="../../src/assets/heroImage.svg"
             alt=""
             className="w-[546px] h-[546px] object-cover"
           />
