@@ -1,5 +1,6 @@
 import { Button } from "./ui/button";
 const Hero = () => {
+  const imgUrl = new URL('../assets/heroImage.svg', import.meta.url).href
   return (
     <section className="mt-8 flex py-3 container">
       <div className="flex flex-row w-full justify-between items-center">
@@ -22,7 +23,7 @@ const Hero = () => {
         </div>
         <div className="basis-1/2 lg:block hidden">
           <img
-            src="@/assets/heroImage.svg"
+            src={imgUrl}
             alt=""
             className="w-[546px] h-[546px] object-cover"
           />
