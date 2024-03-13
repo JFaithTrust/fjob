@@ -8,6 +8,7 @@ import {getDistrictById} from "@/api/fetchDistrict";
 import {getRegionByDistrictId} from "@/api/fetchRegion";
 import {useNavigate} from "react-router-dom";
 import {SkeletonCard} from "@/components/ui/custom-skeleton.tsx";
+import {jobIcon} from "@/assets";
 
 interface Jobs {
     job: Job;
@@ -39,7 +40,7 @@ const JobCard = ({job}: Jobs) => {
             {loading ? (<SkeletonCard/>) : (<div className="flex flex-col gap-y-4 p-6">
                 <div className="flex flex-row font-roboto gap-x-2 items-center">
                     <Avatar>
-                        <AvatarImage src="/src/assets/job.svg" alt={job.title}/>
+                        <AvatarImage src={jobIcon} alt={job.title}/>
                         <AvatarFallback>{job.title.charAt(0)}</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">

@@ -9,6 +9,7 @@ import {getRegionByDistrictId} from "@/api/fetchRegion";
 import {useNavigate} from "react-router-dom";
 import {SkeletonCard} from "@/components/ui/custom-skeleton.tsx";
 import {calculateAge} from "@/lib/utils.ts";
+import {workerIcon} from "@/assets";
 
 interface Workers {
     worker: Worker;
@@ -40,7 +41,7 @@ const WorkerCard = ({worker}: Workers) => {
             {loading ? (<SkeletonCard/>) : (<div className="flex flex-col gap-y-4 p-6">
                 <div className="flex flex-row font-roboto gap-x-2 items-center">
                     <Avatar>
-                        <AvatarImage src="/src/assets/worker.svg" alt={worker.title}/>
+                        <AvatarImage src={workerIcon} alt={worker.title}/>
                         <AvatarFallback>{worker.title.charAt(0)}</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">

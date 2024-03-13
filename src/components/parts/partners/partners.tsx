@@ -1,4 +1,5 @@
 import "./parners.scss";
+import {akfa, amazon, samsung, zoom} from "@/assets";
 
 const Partners = () => {
   return (
@@ -7,64 +8,61 @@ const Partners = () => {
         <div className="slider">
           <div className="slide-track">
             <div className="slide flex items-center">
-              <img src="/src/assets/samsung.svg" alt="" />
+              <img src={samsung} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/zoom.svg" alt="" />
+              <img src={zoom} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/amazon.svg" alt="" />
+              <img src={amazon} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/akfa.svg" alt="" />
+              <img src={akfa} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/samsung.svg" alt="" />
+              <img src={samsung} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/zoom.svg" alt="" />
+              <img src={zoom} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/amazon.svg" alt="" />
+              <img src={amazon} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/akfa.svg" alt="" />
+              <img src={akfa} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/samsung.svg" alt="" />
+              <img src={samsung} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/zoom.svg" alt="" />
+              <img src={zoom} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/amazon.svg" alt="" />
+              <img src={amazon} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/akfa.svg" alt="" />
+              <img src={akfa} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/samsung.svg" alt="" />
+              <img src={samsung} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/zoom.svg" alt="" />
+              <img src={zoom} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/amazon.svg" alt="" />
+              <img src={amazon} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/akfa.svg" alt="" />
+              <img src={akfa} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/samsung.svg" alt="" />
+              <img src={samsung} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/zoom.svg" alt="" />
+              <img src={zoom} alt=""/>
             </div>
             <div className="slide flex items-center">
-              <img src="/src/assets/amazon.svg" alt="" />
-            </div>
-            <div className="slide flex items-center">
-              <img src="/src/assets/akfa.svg" alt="" />
+              <img src={amazon} alt=""/>
             </div>
           </div>
         </div>
