@@ -17,7 +17,7 @@ const Jobs = () => {
         <div className="bg-lightblue">
             <div className="container py-8 flex flex-col gap-y-8">
                 <h1 className="text-center font-roboto sm:text-5xl text-4xl font-semibold">
-                    <span className="text-darkblue">Top</span> Jobs
+                    <span className="text-darkblue">Top</span> Ishlar
                 </h1>
                 <Carousel
                     plugins={[
@@ -46,7 +46,7 @@ const Jobs = () => {
                         className="sm:px-5 px-2 sm:py-3 py-1 font-roboto sm:text-lg text-base rounded-xl"
                         onClick={() => navigate("/jobs")}
                     >
-                        See More...
+                        Batafsil...
                     </Button>
                 </div>
             </div>

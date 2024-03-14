@@ -5,7 +5,7 @@ const Feedbacks = () => {
     <div className="bg-lightblue">
       <div className="container py-8 flex flex-col gap-y-8">
         <h1 className="text-center font-roboto text-3xl font-semibold">
-          <span className="text-darkblue">Feedbacks</span> from our Customers
+            Mijozlarimizdan <span className="text-darkblue">fikr-mulohazalar</span>
         </h1>
         <FeedbacksSlider />
       </div>

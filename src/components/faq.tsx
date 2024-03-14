@@ -10,7 +10,8 @@ const Faq = () => {
     <div className="bg-lightblue">
       <div className="container py-8 flex flex-col gap-y-8">
         <h1 className="text-center font-roboto text-3xl font-semibold">
-          <span className="text-darkblue">F.A.Q.</span> Session
+          Tez-tez so'raladigan savollar
+          (<span className="text-darkblue">F.A.Q.</span>)
         </h1>
         <Accordion type="single" collapsible className="w-full xl:px-56 lg:px-40 sm:px-20 px-0">
           <AccordionItem value="item-1">

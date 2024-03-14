@@ -17,7 +17,7 @@ const Workers = () => {
     <div className="bg-lightblue">
       <div className="container py-8 flex flex-col gap-y-8">
         <h1 className="text-center font-roboto sm:text-5xl text-4xl font-semibold">
-          <span className="text-darkblue">Top</span> Workers
+          <span className="text-darkblue">Top</span> Ishchilar
         </h1>
         <Carousel
             plugins={[
@@ -45,7 +45,7 @@ const Workers = () => {
             variant={"outline"}
             className="sm:px-5 px-2 sm:py-3 py-1 font-roboto sm:text-lg text-base rounded-xl"
           >
-            See More...
+            Batafsil...
           </Button>
         </div>
       </div>

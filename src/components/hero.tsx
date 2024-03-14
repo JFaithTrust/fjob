@@ -17,8 +17,8 @@ const Hero = () => {
             here', making it look like readable English.
           </span>
           <div className="flex flex-row sm:gap-x-6 gap-x-3">
-            <Button variant={'fill'} className="sm:px-5 px-3 sm:py-4 py-2 rounded-sm sm:text-base text-sm font-semibold">Hire a Freelancer</Button>
-            <Button variant={'outline'} className="sm:px-5 px-3 sm:py-4 py-2 rounded-sm sm:text-base text-sm font-semibold">Earn Money as a Freelancer</Button>
+            <Button variant={'fill'} className="sm:px-5 px-3 sm:py-4 py-2 rounded-sm sm:text-base text-sm font-semibold">Ishchi yonlash</Button>
+            <Button variant={'outline'} className="sm:px-5 px-3 sm:py-4 py-2 rounded-sm sm:text-base text-sm font-semibold">Ishchi sifatida pul ishlash</Button>
           </div>
         </div>
         <div className="basis-1/2 lg:block hidden">

@@ -26,10 +26,10 @@ const Workers = () => {
         <div className="flex flex-col gap-y-8">
             <div className="py-8 bg-lightblue">
                 <div className="flex flex-col gap-y-8 container">
-                    <h1 className="text-5xl font-semibold text-darkindigo">Workers</h1>
+                    <h1 className="text-5xl font-semibold text-darkindigo">Ishchilar</h1>
                     <div className="grid grid-cols-4 gap-x-3 items-center py-4 justify-between"> {/* Search bar */}
                         <Input
-                            placeholder="Enter name..."
+                            placeholder="Qidirish..."
                             value={searchTerm}
                             onChange={(event) => setSearchTerm(event.target.value)}
                             className="max-w-sm col-span-3 md:col-span-4"
