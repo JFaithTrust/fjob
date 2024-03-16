@@ -58,3 +58,10 @@ export interface Region{
     id: string;
     name: string;
 }
+
+export interface Feedback{
+    id: string;
+    message: string;
+    fullName: string;
+    dueDate: Date;
+}
