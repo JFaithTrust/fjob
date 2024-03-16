@@ -2,7 +2,7 @@ import {Job} from "@/types";
 import {JobCard} from "./parts";
 import {Button} from "./ui/button";
 import {useEffect, useState} from "react";
-import {getJobsByPagination} from "@/api/fetchJobs";
+import { getTopJobs } from "@/api/fetchJobs";
 import {useNavigate} from "react-router-dom";
 import Autoplay from "embla-carousel-autoplay";
 import {Carousel, CarouselContent, CarouselItem} from "@/components/ui/carousel.tsx";
@@ -11,7 +11,7 @@ const Jobs = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getJobsByPagination(1, 4).then((data) => setJobs(data));
+        getTopJobs().then((data) => setJobs(data));
     }, []);
     return (
         <div className="bg-lightblue">
