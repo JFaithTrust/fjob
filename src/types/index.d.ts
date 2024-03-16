@@ -59,6 +59,13 @@ export interface Region{
     name: string;
 }
 
+
+export class FAQ{
+    id: string
+    question: string
+    answer: string
+    createDate: Date
+}
 export interface Feedback{
     id: string;
     message: string;
