@@ -1,11 +1,10 @@
 import { Worker } from "@/types";
 import axios from "./axios";
 
-export const getWorkersByPagination = async (pageNumber: number, pageSize: number): Promise<Worker[]> => {
-  const { data } = await axios.get(`/api/Worker/GetAll?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+export const getAllTopWorkers = async (): Promise<Worker[]> => {
+  const { data } = await axios.get("/api/Worker/GetTopWorkers");
   return data;
 }
-
 
 // get worker by id
 export const getWorkerById = async (id: string): Promise<Worker> => {

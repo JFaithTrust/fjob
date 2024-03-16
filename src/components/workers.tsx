@@ -2,7 +2,7 @@ import { Worker } from "@/types";
 import { WorkerCard} from "./parts";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
-import { getWorkersByPagination } from "@/api/fetchWorkers";
+import { getAllTopWorkers } from "@/api/fetchWorkers";
 import Autoplay from "embla-carousel-autoplay";
 import {Carousel, CarouselContent, CarouselItem} from "@/components/ui/carousel.tsx";
 
@@ -10,7 +10,8 @@ const Workers = () => {
   const [workers, setWorkers] = useState<Worker[]>([]);
 
   useEffect(() => {
-    getWorkersByPagination(1, 4).then((data) => setWorkers(data));
+    getAllTopWorkers()
+      .then((data) => setWorkers(data));
   }, []);
 
   return (
