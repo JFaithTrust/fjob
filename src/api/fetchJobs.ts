@@ -11,16 +11,6 @@ export const getJobById = async (id: string): Promise<Job> => {
   return data;
 };
 
-// get all jobs by pagination params
-export const getJobsByPagination = async (
-  pageNumber: number,
-  pageSize: number
-): Promise<Job[]> => {
-  const { data } = await axios.get(
-    `/api/Job/GetAll?pageNumber=${pageNumber}&pageSize=${pageSize}`
-  );
-  return data;
-};
 export const getTopJobs = async (): Promise<Job[]> => {
   const { data } = await axios.get("/api/Job/GetTopJobs");
   return data;
