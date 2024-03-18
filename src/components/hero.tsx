@@ -1,7 +1,9 @@
 import {Button} from "./ui/button";
 import {heroImage} from "@/assets";
+import {useNavigate} from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="mt-8 flex py-3 container">
       <div className="flex flex-row w-full justify-between items-center">
@@ -13,14 +15,16 @@ const Hero = () => {
           </h2>
           <span className="sm:text-base text-sm font-roboto">
             Siz o'z tajribasini ko'tarmoqchi bo'lgan tajribali mutaxassismisiz . Bizning platformamiz sizni yuqori darajadagi kompaniyalar va qiziqarli ish o'rinlari bilan bog'laydi. Bizning qulay interfeysimiz va moslashtirilgan qidiruv filtrlarimiz bilan orzuingizdagi ishni topish hech qachon qiyin bo'lmagan.
-Bugun bizga qo'shiling va muvaffaqiyatli karyera yo'lingizda keyingi qadamni tashlang.
+            Bugun bizga qo'shiling va muvaffaqiyatli karyera yo'lingizda keyingi qadamni tashlang.
           </span>
           <div className="flex flex-row sm:gap-x-6 gap-x-3">
             <Button variant={'fill'}
-                    className="sm:px-5 px-3 sm:py-4 py-2 rounded-sm sm:text-base text-sm font-semibold">Ishchi
+                    className="sm:px-5 px-3 sm:py-4 py-2 rounded-sm sm:text-base text-sm font-semibold"
+                    onClick={() => navigate('/contact')}>Ishchi
               yonlash</Button>
             <Button variant={'outline'}
-                    className="sm:px-5 px-3 sm:py-4 py-2 rounded-sm sm:text-base text-sm font-semibold">Ishchi sifatida
+                    className="sm:px-5 px-3 sm:py-4 py-2 rounded-sm sm:text-base text-sm font-semibold"
+                    onClick={() => navigate('/contact')}>Ishchi sifatida
               pul ishlash</Button>
           </div>
         </div>
@@ -28,7 +32,7 @@ Bugun bizga qo'shiling va muvaffaqiyatli karyera yo'lingizda keyingi qadamni tas
           <img
             src={heroImage}
             alt=""
-            className="w-[546px] h-[546px] object-cover"
+            className="w-[700px] h-[546px] object-cover"
           />
         </div>
       </div>

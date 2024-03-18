@@ -23,7 +23,7 @@ const Faq = () => {
         </h1>
         <Accordion type="single" collapsible className="w-full xl:px-56 lg:px-40 sm:px-20 px-0">
           {faqs.map((faq) => (
-              <AccordionItem value={faq.id}>
+              <AccordionItem value={faq.id} key={faq.id}>
                 <AccordionTrigger>{faq.question}</AccordionTrigger>
                 <AccordionContent>
                   <div className="border-l-2 border-darkblue pl-4">
