@@ -4,6 +4,7 @@ import {About, Contact, Home, JobDetail, Jobs, Layout, Workers,} from "./pages";
 import WorkerDetail from "./pages/workers/worker-detail";
 import {Toaster} from "@/components/ui/sonner"
 import {SpeedInsights} from "@vercel/speed-insights/react";
+import {Analytics} from "@vercel/analytics/react"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         </Route>
       </Routes>
       <SpeedInsights/>
+      <Analytics/>
     </div>
   );
 }
