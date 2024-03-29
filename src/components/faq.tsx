@@ -1,7 +1,7 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion";
-import { useEffect, useState } from "react";
-import { getAllFAQs } from "@/api/fetchFAQ.ts";
-import { FAQ } from "@/types";
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "@/components/ui/accordion";
+import {useEffect, useState} from "react";
+import {getAllFAQs} from "@/api/fetchFAQ.ts";
+import {FAQ} from "@/types";
 
 const Faq = () => {
   const [faqs, setFaqs] = useState<FAQ[]>([])
@@ -33,7 +33,6 @@ const Faq = () => {
               </AccordionItem>
             )
           )}
-
           <AccordionItem value="item-2">
             <AccordionTrigger>Is it animated?</AccordionTrigger>
             <AccordionContent>
