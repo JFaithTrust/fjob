@@ -1,20 +1,20 @@
-import {Job} from "@/types";
 import {Button} from "./ui/button";
-import {lazy, Suspense, useEffect, useState} from "react";
-import {getTopJobs} from "@/api/fetchJobs";
+import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import Autoplay from "embla-carousel-autoplay";
 import {Carousel, CarouselContent, CarouselItem} from "@/components/ui/carousel.tsx";
-
-const JobCard = lazy(() => import("./parts/job-card"));
+import {JobCard} from "@/components/parts";
+import useJobStore from "@/lib/store/jobs.store.ts";
+import {SkeletonCard} from "@/components/ui/custom-skeleton.tsx";
 
 const Jobs = () => {
-  const [jobs, setJobs] = useState<Job[]>([]);
+  // const [jobs, setJobs] = useState<Job[]>([]);
   const navigate = useNavigate();
+  const {jobs, loading, getTopJobs} = useJobStore();
 
   useEffect(() => {
-    getTopJobs().then((data) => setJobs(data))
-  }, []);
+    getTopJobs().then()
+  }, [getTopJobs]);
 
   return (
     <div className="bg-lightblue">
@@ -22,29 +22,37 @@ const Jobs = () => {
         <h1 className="text-center font-roboto sm:text-5xl text-4xl font-semibold">
           <span className="text-darkblue">Top</span> Ishlar
         </h1>
-        <Carousel
-          plugins={[
-            Autoplay({
-              delay: 2000,
-            }),
-          ]}
-          opts={{
-            align: "start",
-          }}
-          className="w-full"
-        >
-          <CarouselContent>
-            {jobs.map((job, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <div className="p-1">
-                  <Suspense fallback={<div className={"text-9xl"}>Loading..</div>}>
-                    <JobCard job={job} key={job.id}/>
-                  </Suspense>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+        {loading ? <div className={"grid grid-cols-3 gap-4"}>
+          {
+            Array.from({length: 3}).map((_, index) => (
+              <div key={index} className={"flex flex-col bg-white rounded-lg shadow-[0_1px_8px_-2px_#2F07E5]"}>
+                <SkeletonCard/>
+              </div>
+            ))
+          }
+        </div> : (
+          <Carousel
+            plugins={[
+              Autoplay({
+                delay: 2000,
+              }),
+            ]}
+            opts={{
+              align: "start",
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {jobs.map((job, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="p-1">
+                    <JobCard job={job}/>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        )}
         <div className="flex items-center justify-center">
           <Button
             variant={"outline"}
