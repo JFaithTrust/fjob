@@ -5,6 +5,8 @@ import {Toaster} from "@/components/ui/sonner.tsx";
 import "./App.css"
 import {lazy, Suspense} from "react";
 import Loading from "@/components/layout/loading.tsx";
+import {SpeedInsights} from "@vercel/speed-insights/react";
+import {Analytics} from "@vercel/analytics/react";
 
 
 const About = lazy(() => import("@/pages/about"));
@@ -65,8 +67,8 @@ function App() {
           </Routes>
         </CSSTransition>
       </SwitchTransition>
-      {/*<SpeedInsights/>*/}
-      {/*<Analytics/>*/}
+      <SpeedInsights/>
+      <Analytics/>
     </>
   );
 }
