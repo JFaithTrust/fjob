@@ -5,14 +5,17 @@ import axios from '@/api/axios';
 interface JobStore {
   jobs: Job[];
   job: Job | null;
+  jobCount: number;
   loading: boolean;
   error: string | null;
   getTopJobs: () => Promise<void>;
 }
 
+
 export const useJobStore = create<JobStore>((set) => ({
   jobs: [],
   job: null,
+  jobCount: 0,
   loading: false,
   error: null,
   getTopJobs: async () => {
@@ -24,7 +27,7 @@ export const useJobStore = create<JobStore>((set) => ({
       console.error('Error fetching jobs:', error);
       set({loading: false, error: 'Failed to fetch jobs'});
     }
-  }
+  },
 }))
 
 export default useJobStore;

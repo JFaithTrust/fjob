@@ -32,7 +32,6 @@ const JobCard = ({job}: Jobs) => {
             <span className="text-orange-400">/Oy</span>
           </div>
           <div>
-
               <span className="text-base leading-none font-normal text-gray-600">
                                   {job.regionName} {job.districtName}
                                 </span>
@@ -50,7 +49,7 @@ const JobCard = ({job}: Jobs) => {
           </div>
           <Button
             className="px-4 py-1.5 rounded-xl text-sm font-semibold"
-            onClick={() => navigate(`/job-detail/${job.id}`)}
+            onClick={() => navigate(`/jobs/job-detail/${job.id}`)}
           >
             Ko'rish
           </Button>

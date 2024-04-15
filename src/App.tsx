@@ -4,8 +4,6 @@ import {Home} from "@/pages";
 import {Toaster} from "@/components/ui/sonner.tsx";
 import "./App.css"
 import {lazy, Suspense} from "react";
-import {SpeedInsights} from "@vercel/speed-insights/react";
-import {Analytics} from "@vercel/analytics/react";
 import Loading from "@/components/layout/loading.tsx";
 
 
@@ -53,12 +51,12 @@ function App() {
               <Suspense fallback={<Loading/>}>
                 <JobDetail/>
               </Suspense>
-            } path={"/jobs/:jobId"}/>
+            } path={"/jobs/job-detail/:jobId"}/>
             <Route element={
               <Suspense fallback={<Loading/>}>
                 <WorkerDetail/>
               </Suspense>
-            } path={"/workers/:workerId"}/>
+            } path={"/workers/worker-detail/:workerId"}/>
             <Route path={"*"} element={
               <Suspense fallback={<Loading/>}>
                 <NotFound/>
@@ -67,8 +65,8 @@ function App() {
           </Routes>
         </CSSTransition>
       </SwitchTransition>
-      <SpeedInsights/>
-      <Analytics/>
+      {/*<SpeedInsights/>*/}
+      {/*<Analytics/>*/}
     </>
   );
 }

@@ -19,8 +19,9 @@ const NotFound = () => {
                   Afsuski, sahifa topilmadi!
                 </h3>
 
-                <Button className={"px-12 py-4 rounded-3xl flex items-center w-fit"} onClick={() => navigate("/")}>Go to
-                  Home <ArrowRight/></Button>
+                <Button className={"px-12 py-4 rounded-3xl flex items-center w-fit"} onClick={() => navigate("/")}>
+                  Bosh sahifaga qaytish
+                  <ArrowRight/></Button>
               </div>
             </div>
           </div>
