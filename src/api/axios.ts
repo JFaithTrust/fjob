@@ -3,8 +3,8 @@ import axios, {AxiosInstance} from "axios";
 // global url
 // const BASE_URL = "http://172.16.15.25:28";
 
-// local url
-const BASE_URL = "https://prepared-sharply-scorpion.ngrok-free.app"
+// local url  
+const BASE_URL = "https://accepted-sole-enough.ngrok-free.app"
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,
