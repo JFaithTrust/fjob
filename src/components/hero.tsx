@@ -14,14 +14,14 @@ const Hero = () => {
             Xush kelibsiz
           </h2>
           <span className="sm:text-base text-sm font-roboto">
-            Siz o'z tajribasini ko'tarmoqchi bo'lgan tajribali mutaxassismisiz . Bizning platformamiz sizni yuqori darajadagi kompaniyalar va qiziqarli ish o'rinlari bilan bog'laydi. Bizning qulay interfeysimiz va moslashtirilgan qidiruv filtrlarimiz bilan orzuingizdagi ishni topish hech qachon qiyin bo'lmagan.
+            Siz o'z tajribasini oshirmoqchi bo'lgan tajribali mutaxassismisiz? Bizning platformamiz sizni yuqori darajadagi kompaniyalar va qiziqarli ish o'rinlari bilan bog'laydi. Bizning qulay interfeysimiz va moslashtirilgan qidiruv filtrlarimiz bilan orzuingizdagi ishni topish hech qachon qiyin bo'lmagan.
             Bugun bizga qo'shiling va muvaffaqiyatli karyera yo'lingizda keyingi qadamni tashlang.
           </span>
           <div className="flex flex-row sm:gap-x-6 gap-x-3">
             <Button variant={'fill'}
                     className="sm:px-5 px-3 sm:py-4 py-2 rounded-sm sm:text-base text-sm font-semibold"
                     onClick={() => navigate('/contact')}>Ishchi
-              yonlash</Button>
+              yollash</Button>
             <Button variant={'outline'}
                     className="sm:px-5 px-3 sm:py-4 py-2 rounded-sm sm:text-base text-sm font-semibold"
                     onClick={() => navigate('/contact')}>Ishchi sifatida
