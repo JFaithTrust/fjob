@@ -16,7 +16,7 @@ const Categories = () => {
                 <h1 className="text-center font-roboto text-3xl font-semibold">{`Biz bilan ${categories.length} tadan ortiq`} <span
                     className="text-darkblue">ish turlari</span> bo'yicha ish oling</h1>
                 <div className="grid lg:grid-cols-6 sm:grid-cols-4 grid-cols-2 gap-3">
-                    {categories.map((category) => (
+                    {categories.splice(0,12).map((category) => (
                             <CategoryCard key={category.id} category={category} />
                     ))}
                 </div>

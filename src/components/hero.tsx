@@ -10,7 +10,7 @@ const Hero = () => {
         <div className="flex flex-col gap-y-12 lg:basis-1/2 basis-full">
           <h2 className="lg:text-5xl sm:text-5xl text-4xl font-bold font-roboto">
             Imkoniyatlarga mos keladigan<br/>
-            <span className="text-darkblue">“UzWorks“</span> platformasiga <br/>
+            <span className="text-darkblue">"Fjob"</span> platformasiga <br/>
             Xush kelibsiz
           </h2>
           <span className="sm:text-base text-sm font-roboto">

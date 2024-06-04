@@ -1,4 +1,4 @@
-import { Categories, Faq, Feedbacks, Hero, Jobs, Workers } from "@/components";
+import { Categories, Faq, Feedbacks, Hero, Jobs } from "@/components";
 import { Partners } from "@/components/parts";
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
       <Hero />
       <Partners />
       <Jobs />
-      <Workers />
+      {/*<Workers />*/}
       <Categories />
       <Feedbacks />
       <Faq />

@@ -12,7 +12,7 @@ const About = () => {
             <div className="flex flex-col lg:w-[600px] w-fit gap-y-10">
               <span className="flex items-center text-black sm:text-6xl text-5xl font-roboto font-bold gap-x-1.5">
                 <img src={darkLogo} alt="" className={"sm:w-14 w-12 sm:h-14 h-12"}/>
-                <span className="text-darkblue">UZ</span>WORKS
+                <span className="text-darkblue">F</span>JOB
               </span>
               <p className="text-lg text-darkindigo">
                 Biz "UZWORKS" nomli platformamiz 2024 yilida tashkil etilgan, va foydalanuvchilarga uydan chiqmasdan
