@@ -1,10 +1,10 @@
-import { getCategoryById } from "@/api/fetchCategory";
-import { getDistrictById } from "@/api/fetchDistrict";
-import { getRegionByDistrictId } from "@/api/fetchRegion";
-import { Partners, WorkerCard } from "@/components/parts";
+// import { getCategoryById } from "@/api/fetchCategory";
+// import { getDistrictById } from "@/api/fetchDistrict";
+// import { getRegionByDistrictId } from "@/api/fetchRegion";
+import { Partners } from "@/components/parts";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Category, District, Experience, Region, Worker } from "@/types";
+import { Experience, Worker } from "@/types";
 import { useState, useEffect } from "react";
 import {Link, useParams} from "react-router-dom";
 import { format } from "date-fns";
@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import {
   getExperienceByUserId,
   getWorkerById,
-  getWorkersByCategoryId,
+  // getWorkersByCategoryId,
 } from "@/api/fetchWorkers";
 import {SkeletonDetail} from "@/components/ui/custom-skeleton.tsx";
 
@@ -159,10 +159,10 @@ function SocialButtonIn({link, title}: SocialButtonProps) {
 
 const WorkerDetail = () => {
   const [worker, setWorker] = useState<Worker>();
-  const [category, setCategory] = useState<Category>();
-  const [district, setDistrict] = useState<District>();
-  const [region, setRegion] = useState<Region>();
-  const [categoryWorkers, setCategoryWorkers] = useState<Worker[]>();
+  // const [category, setCategory] = useState<Category>();
+  // const [district, setDistrict] = useState<District>();
+  // const [region, setRegion] = useState<Region>();
+  // const [categoryWorkers, setCategoryWorkers] = useState<Worker[]>();
   const [experiences, setExperiences] = useState<Experience[]>();
   const [loading, setLoading] = useState(true);
 
@@ -179,15 +179,9 @@ const WorkerDetail = () => {
   useEffect(() => {
     const getPartOfJobs = async () => {
       if (worker) {
-        const category = await getCategoryById(worker.categoryId);
-        setCategory(category);
-        const district = await getDistrictById(worker.districtId);
-        setDistrict(district);
-        const region = await getRegionByDistrictId(district.id);
-        setRegion(region);
-        const categoryWorker = await getWorkersByCategoryId(worker.categoryId);
-        setCategoryWorkers(categoryWorker);
-        const experiences = await getExperienceByUserId(worker.createdBy);
+        // const categoryWorker = await getWorkersByCategoryId(worker.id);
+        // setCategoryWorkers(categoryWorker);
+        const experiences = await getExperienceByUserId(worker.id);
         setExperiences(experiences);
         setLoading(false)
       }
@@ -216,7 +210,7 @@ const WorkerDetail = () => {
               <div className="flex flex-col items-center gap-y-0.5">
                 <span className="text-xs">Ish turi</span>
                 <Badge className="text-gray-400 font-normal">
-                  {category?.title}
+                  {worker?.categoryName}
                 </Badge>
               </div>
               <div className="bg-lightblue h-fit w-[3px]"/>
@@ -309,7 +303,7 @@ const WorkerDetail = () => {
                   Manzil
                 </span>
                 <span className="text-darkindigo font-semibold text-lg">
-                  {region?.name}, {district?.name}
+                  {worker?.regionName}, {worker?.districtName}
                 </span>
               </div>
               <div className="flex flex-col gap-y-1">
@@ -420,14 +414,14 @@ const WorkerDetail = () => {
               </div>
             </div>
           </div>)}
-          <div className="flex flex-col gap-y-6 col-span-1 rounded-xl">
-            {categoryWorkers
-                ?.slice(0, 5)
-                .filter((item) => item.id !== worker?.id)
-                .map((item) => (
-                    <WorkerCard worker={item} key={item.id}/>
-                ))}
-          </div>
+          {/*<div className="flex flex-col gap-y-6 col-span-1 rounded-xl">*/}
+          {/*  {categoryWorkers*/}
+          {/*      ?.slice(0, 5)*/}
+          {/*      .filter((item) => item.id !== worker?.id)*/}
+          {/*      .map((item) => (*/}
+          {/*          <WorkerCard worker={item} key={item.id}/>*/}
+          {/*      ))}*/}
+          {/*</div>*/}
         </div>
       </div>
       <Partners/>

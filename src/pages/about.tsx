@@ -15,7 +15,7 @@ const About = () => {
                 <span className="text-darkblue">F</span>JOB
               </span>
               <p className="text-lg text-darkindigo">
-                Biz "UZWORKS" nomli platformamiz 2024 yilida tashkil etilgan, va foydalanuvchilarga uydan chiqmasdan
+                Biz "FJOB" nomli platformamiz 2024 yilida tashkil etilgan, va foydalanuvchilarga uydan chiqmasdan
                 oson va qulay ish yoki ishchi topa olishini taminlash maqsad qilgan. Bizning platformamiz orqali
                 insonlar o’zlariga qulay bo’lgan ishni topa olishlari mumkin hamda kompayinalar o’zlariga munosib
                 hodimlarni xechqanday ovvoragarchiliklarsiz topishlari mumkin.

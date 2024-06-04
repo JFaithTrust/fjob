@@ -27,8 +27,8 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex flex-row items-center justify-center lg:gap-x-16 gap-x-8 font-mulish font-bold text-lg">
-            <Link to="/jobs">Ishlar</Link>
-            {/*<Link to="/workers">Ishchilar</Link>*/}
+            {/*<Link to="/jobs">Ishlar</Link>*/}
+            <Link to="/workers">Ishchilar</Link>
             <Link to="/contact">Aloqa</Link>
           </div>
         </div>
